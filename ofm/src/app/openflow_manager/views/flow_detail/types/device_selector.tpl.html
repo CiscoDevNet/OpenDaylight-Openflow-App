@@ -1,0 +1,8 @@
+<div ng-controller="devSelectorCtrl" class="form-group">
+    <!-- DEVICE -->
+    <span class="sectionTitle">{{'OF_DEV' | translate }}</h3>
+    <select ng-show="selFlow.mod === 0 && !onlyInOperational(selFlow)" class="form-control" style="width:300px" ng-change="setDeviceAndSelectProperties(selDevice); checkDuplicity('device');" ng-model="selDevice" ng-options="getDeviceFullName(d) for d in selectedDevicesList">
+        <option value="">-</option>
+    </select>
+    <span ng-if="selFlow.mod === 1 || onlyInOperational(selFlow)"><strong>{{' ' + getDeviceFullNameById(selFlow.device)}}</strong></span>
+</div>

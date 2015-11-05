@@ -1,0 +1,17 @@
+<div ng-controller="hostsCtrl">
+
+    <!-- Hosts table start -->
+    <label class="sectionTitle table-title narrow" >{{'OF_HOSTS' | translate }}</label>
+    <table ng-table="tableParamsHosts" class="table dataTable">
+        <tr ng-repeat="host in $data">
+            <td data-title="'OM_HOST_ID' | translate " sortable="'id'">{{ host.id }}</td>
+            <td data-title="'OM_HOST_AP_ID' | translate " sortable="'attachment-points-id'">{{ host['attachment-points-id'] }}</td>
+            <td data-title="'OM_HOST_AP_ACTIVE' | translate " sortable="'attachment-points-active'">{{ host['attachment-points-active'] }}</td>
+            <td data-title="'OM_HOST_ADDRESS_IP' | translate " sortable="'addresses-ip'">{{ host['addresses-ip'] }}</td>
+            <td data-title="'OM_HOST_ADDRESS_MAC' | translate " sortable="'addresses-mac'">{{ host['addresses-mac'] }}</td>
+            <td data-title="'OM_HOST_ADDRESS_LS' | translate " sortable="'addresses-last-seen'">{{ timestampToTime(host['addresses-last-seen']) }}</td>
+        </tr>
+    </table>
+    <!-- Hosts table end -->
+
+</div>

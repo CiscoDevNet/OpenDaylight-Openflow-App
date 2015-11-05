@@ -1,0 +1,54 @@
+{
+    "devices": [
+        {
+            "device_type": ["ASR-9001-S V01", "ASR-9001-S V03"],
+            "device_code": "asr9k",
+            "pipelines": [
+                {
+                    "id": "129",
+                    "tables": ["0"]
+                },
+                {
+                    "id": "130",
+                    "tables": ["0"]
+                },
+                {
+                    "id": "131",
+                    "tables": ["0"]
+                },
+                {
+                    "id": "132",
+                    "tables": ["0"]
+                },
+                {
+                    "id": "65535",
+                    "tables": ["0"]
+                }
+            ]
+        },
+        {
+            "device_type": ["N3K-C3048TP-1GE V01"],
+            "device_code": "cvg-n3k",
+            "pipelines": [
+                {
+                    "id": "201",
+                    "tables": ["0"]
+                },
+                {
+                    "id": "202",
+                    "tables": ["0","1"]
+                }
+            ]
+        },
+        {
+            "device_type": ["WS-C4500X-16"],
+            "device_code": "cvg-cat4k-1",
+            "pipelines": [
+                {
+                    "id": "1",
+                    "tables": ["0", "1"]
+                }
+            ]
+        }
+    ]
+}

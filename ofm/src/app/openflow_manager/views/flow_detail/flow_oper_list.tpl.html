@@ -1,0 +1,17 @@
+<div>
+    <span class="sectionTitle clickable" ng-click="expand()" tooltip="{{'OF_GEN_PROPS_SHOW_TT' | translate}}">{{ label | translate }}
+        <!-- <i class="{{expanded ? 'collapse-arrow-icon' : 'expand-arrow-icon'}}"></i> -->
+    </span>
+
+    <div class="scrollAbleArea" ng-if="expanded">
+        <div class="switchButtonWrapper" ng-repeat="p in getProps() | showHideGroupedProperties:getSelectedProps()" tooltip="{{'OF_ADD_PROP_TT' | translate}}">
+
+            <!-- <button class="btn btn-primary {{ p.propEnabled ? '' : 'btn-disabled' }}" ng-disabled="!p.propEnabled" ng-click="addPropToList(p.displayLabel, getProps(), getSelectedProps())">
+                {{ (p.propEnabled ? 'OF_ADD' : 'OF_ADDED') | translate }}
+            </button> -->
+            <i class="{{ p.propEnabled ? 'disabled-switch' : 'enabled-switch' }}" ng-disabled="!p.propEnabled" ng-click="addPropToList(p.displayLabel, getProps(), getSelectedProps())"></i>
+            <div ng-click="addPropToList(p.displayLabel, getProps(), getSelectedProps())">{{p.displayLabel | translate}}</div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>

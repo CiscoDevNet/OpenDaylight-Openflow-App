@@ -1,0 +1,176 @@
+<div ng-controller="flowInfoCtrl">
+    <!-- Flows summary table start -->
+    <label class="sectionTitle clickable narrow" ng-click="summaryExpand()" tooltip="{{'OF_FL_SUMMARY_EXPAND_TT' | translate}}">
+        {{'OF_FLOW_SUMMARY' | translate }} &nbsp;
+        <i class="{{summaryExpanded ? 'collapse-arrow-icon' : 'expand-arrow-icon'}}"></i>
+    </label>
+    <div ng-show="summaryExpanded">
+        <table ng-table="summaryTableParams" show-filter="true" class="table dataTable no-footer">
+            <tr ng-repeat="device in $data">
+                <td data-title="'OM_DEVICE' | translate " filter="{ 'id' : 'text' }">{{ device.id }}</td>
+                <td data-title="'OM_DEVICE_TYPE' | translate " filter="{ 'device-type' : 'text' }">{{ getDeviceType(device) }}</td>
+                <td data-title="'OM_OF_DEVICE_NAME' | translate ">{{device['flow-node-inventory:description']}}</td>
+                <td data-title="'OM_OF_VERSION' | translate ">{{device.version}}</td>
+                <td data-title="'OM_DEVICE_DEPLOYMENT_MODE' | translate ">
+                    <div class="iconsWrapper" style="text-align: center;" ng-show="device.deploymentMode">
+                        <div class="circled-background {{ device.deploymentMode === 'PROACTIVE' ? 'selected' : ''}}" 
+                             ng-click="setDeviceDeploymentMode('PROACTIVE', device.id)" tooltip="{{ 'OF_PROACTIVE' | translate }}">P</div> 
+                        <div class="circled-background {{ device.deploymentMode === 'REACTIVE' ? 'selected' : ''}}" 
+                             ng-click="setDeviceDeploymentMode('REACTIVE', device.id)" tooltip="{{ 'OF_REACTIVE' | translate }}">R</div> 
+                        <div class="circled-background {{ device.deploymentMode === 'INTEGRATED' ? 'selected' : ''}}" 
+                             ng-click="setDeviceDeploymentMode('INTEGRATED', device.id)" tooltip="{{ 'OF_INTEGRATED' | translate }}">I</div>
+                    </div>
+                    <div ng-hide="device.deploymentMode">{{'OF_NOT_AVAILABLE' | translate}}</div>
+                </td>
+                <td data-title="'OF_FLOW_SUMMARY_PENDING_FLOWS' | translate" class="center">{{ summaryDevicePendingFlows(device.id).length }}</td>
+                <td data-title="'OF_FLOW_SUMMARY_CONFIGURED_FLOWS' | translate" class="center">{{ summaryDeviceConfiguredFlows(device.id).length }}</td>
+            </tr>
+        </table>
+    </div>
+    <!-- Flows summary table end -->
+    <div class="separator"></div>
+    <div class="clear"></div>
+
+    <label class="sectionTitle">{{'OF_FILTER_LABEL' | translate }} <b>{{(filtersActive ? 'OF_FILTER_ACTIVE' : 'OF_FILTER_INACTIVE') | translate }}</b></label>
+    
+    <div class="clear"></div>
+
+    <script id="filterTableHeader" type="text/ng-template">
+        <tr>
+            <th colspan="4">
+                <div class="iconWrapper" >
+                    <a ng-click="modifySelectedFilters()"><i class="edit-icon-bordered"  tooltip="{{'OF_FILTERS_MODIFY_TT' | translate}}"></i></a>
+                    <a ng-click="activateFilter()"><i class="{{filtersActive === false ? 'activate-icon-bordered' : 'deactivate-icon-bordered'}}" tooltip="{{'OF_FILTERS_ACTIVATE_TT' | translate}}"></i></a>
+                </div>
+                </th>
+        </tr>
+        <tr>
+            <th ng-repeat="column in $columns"
+                ng-class="{
+                            'sortable': parse(column.sortable),
+                            'sort-asc': params.sorting()[parse(column.sortable)]=='asc',
+                            'sort-desc': params.sorting()[parse(column.sortable)]=='desc'
+                          }"
+                ng-click="sortBy(column, $event)"
+                ng-show="column.show(this)"
+                ng-init="template = column.headerTemplateURL(this)"
+                class="header {{column.class}}">
+                <div ng-if="!template" ng-show="!template" ng-bind="parse(column.title)"></div>
+                <div ng-if="template" ng-show="template"><div ng-include="template"></div></div>
+            </th>
+        </tr>
+    </script>
+
+    <div class="filter-table">
+        <table ng-table="filterTableParams" class="table dataTable no-footer filter" template-header="filterTableHeader">
+            <!-- <thead>
+                <tr>
+                    <th colspan="4">
+                         
+                    </th>
+                </tr>
+            </thead> -->
+            <tr ng-repeat="filter in $data">
+                <td data-title="'Active'">
+                    <input type="checkbox" ng-checked="filter.active === 1" ng-true-value="1" ng-false-value="0" ng-click="toActivateFilter($index)">
+                </td>
+                <td data-title="'Name'">{{filter.name}}</td>
+                <td data-title="'Delete'">
+                    <a ng-click="deleteFilterFromTable($index)">
+                        <i class="delete-icon" tooltip="{{'OF_BTN_DEL' | translate}}"></i>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+    <script type="text/ng-template" id="ng-table/headers/checkbox.html">
+        <input type="checkbox" ng-model="checkboxes.checked" name="filter-checkbox" value="" />
+    </script>
+
+    <label class="sectionTitle">{{'OF_FLOW_LABEL' | translate }}</label>
+    <div class="clear"></div>
+
+    <script id="flowsTableHeader" type="text/ng-template">
+        <tr>
+            <th colspan="8">
+                <div class="iconWrapper" >
+                    <a ng-click="modifySelectedFlows()"><i class="edit-icon-bordered" tooltip="{{'OF_FLOW_MODIFY_TT' | translate}}"></i></a>
+                    <a ng-click="deleteSelectedFlows()"><i class="delete-icon-bordered" tooltip="{{'OF_FLOWS_DELETE_TT' | translate}}"></i></a>
+                    <a ng-click="loadFlows()"><i class="reload-icon-bordered" tooltip="{{'OF_RELOAD_FLOWS_TT' | translate}}"></i></a>
+                </div>
+                </th>
+        </tr>
+        <tr>
+            <th ng-repeat="column in $columns"
+                ng-class="{
+                            'sortable': parse(column.sortable),
+                            'sort-asc': params.sorting()[parse(column.sortable)]=='asc',
+                            'sort-desc': params.sorting()[parse(column.sortable)]=='desc'
+                          }"
+                ng-click="sortBy(column, $event)"
+                ng-show="column.show(this)"
+                ng-init="template = column.headerTemplateURL(this)"
+                class="header {{column.class}}">
+                <div ng-if="!template" ng-show="!template" ng-bind="parse(column.title)"></div>
+                <div ng-if="template" ng-show="template"><div ng-include="template"></div></div>
+            </th>
+        </tr>
+        <tr>
+            <th ng-repeat="column in $columns" ng-show="column.show(this)" class="filter ng-scope">
+                <div ng-repeat="(name, filter) in column.filter" class="ng-scope">
+                    <div ng-if="!column.filterTemplateURL" ng-show="!column.filterTemplateURL" class="ng-scope">
+                        <div ng-include="filter ? 'ng-table/filters/' + filter + '.html' : ''" class="ng-scope">
+                        </div> 
+                    </div>
+                </div>
+            </th>
+        </tr>
+    </script>
+
+    <table ng-table="tableParams" show-filter="true" class="table dataTable no-footer flowTable" template-header="flowsTableHeader">
+        <tbody>
+            <tr ng-repeat="flow in $data track by $index">
+                <td header="'ng-table/headers/checkbox.html'"><input type="checkbox" ng-model="checkboxes.items[flow.data.id+'@'+flow.data.table_id+'@'+flow.device]"></td>
+                <td data-title="'OF_FLOW_NAME' | translate " sortable="'valueOf()[\'data\'][\'flow-name\']'" filter="{ 'flow-name' : 'text' }">{{labelCbk(flow)}}</td><!-- filter="{ 'flow-name' : 'text' }" -->
+                <td data-title="'OF_FLOW_ID' | translate " sortable="'valueOf()[\'data\'][\'id\']'" filter="{ 'id' : 'text' }">{{flow.data.id}}</td>
+                <td data-title="'OF_TABLE_ID' | translate " sortable="'valueOf()[\'data\'][\'table_id\']'" filter="{ 'table_id' : 'text' }">{{flow.data.table_id}}</td>
+                <td data-title="'OM_DEVICE' | translate " sortable="'device'" filter="{ 'device' : 'text' }">{{ flow.device }}</td>
+                <td data-title="'OM_DEVICE_TYPE' | translate " sortable="'device'" filter="{ 'device-type' : 'text' }">{{ getDeviceTypeById(flow.device) }}</td>
+                <td data-title="'OM_OF_DEVICE_NAME' | translate " sortable="'device'" filter="{ 'device-name' : 'text' }">{{ getDeviceNameById(flow.device) }}</td>
+                <td data-title="'OF_OPER' | translate " sortable="'operational'">{{flow.operational > 1 ? 'OF_ON_DEV' : 'OF_NOT_ON_DEV' | translate}}</td>
+                <td data-title="'OF_ACTIONS' | translate ">
+                    <!-- <div class="iconWrapper" >
+                        <a ng-show="!flow.updating" ng-click="editFlowFunc(flow)">
+                            <i class="edit-icon" tooltip="{{ 'OF_EDIT' | translate }}" ></i>
+                        </a>
+                        <a ng-show="flow.updating" >
+                            <i class="icon-spinner icon-spin" tooltip="{{ 'OF_UPDATING' | translate }}"></i>
+                        </a>
+                    </div> -->
+                    <div class="iconWrapper" >
+                        <a ng-show="!onlyInOperational(flow)" ng-click="editFlowFunc(flow)">
+                            <i class="edit-icon" tooltip="{{ 'OF_EDIT' | translate }}" ></i>
+                        </a>
+                        <a ng-show="onlyInOperational(flow)" ng-click="editFlowFunc(flow)">
+                            <i class="view-icon" tooltip="{{ 'OF_VIEW' | translate }}"></i>
+                        </a>
+                    </div>
+
+                    <div class="iconWrapper" >
+                        <a ng-show="!flow.deleting" ng-click="deleteFlows([flow])" >
+                            <i class="delete-icon" tooltip="{{ 'OF_BTN_DEL' | translate }}"></i>
+                        </a>
+                        <a ng-show="flow.deleting">
+                            <i class="icon-spinner icon-spin" tooltip="{{ 'OF_DELETING' | translate }}"></i>
+                        </a>
+                    </div>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+</div>

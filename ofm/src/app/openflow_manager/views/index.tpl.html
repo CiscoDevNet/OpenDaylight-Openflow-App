@@ -1,0 +1,169 @@
+<div class="openFlowManager">
+    <alert ng-show="loadStatusMsgs.length" type="danger">
+        <b> {{'OM_LOAD_ERROR' | translate }} </b>
+        <div class="text">
+            <span ng-repeat="m in loadStatusMsgs track by $index" >{{m | translate}}</span>
+        </div>
+    </alert>
+    <div ng-hide="loadStatusMsgs.length" class="ofmWrapper">
+        <div class="ofmNav">
+            <div class="navWrapper">
+                <button class="basicView {{view.basic ? 'active':''}}" ng-click="collapseAll(true)" tooltip="{{'OF_BAS_VIEW_TT' | translate}}" >{{'OF_BAS_VIEW' | translate}}</button>
+                <button class="{{view.flowPopup || view.flowOperPopup ? 'active':''}}" ng-click="loadFlows(); toggleExpanded('flowPopup')" tooltip="{{'OF_MANAGMENT_TT' | translate}}">{{ 'OF_MANAGMENT' | translate}}</button>
+                <button class="{{view.statisticsPopup ? 'active':''}}" ng-click="toggleExpanded('statisticsPopup')" tooltip="{{'OF_STATS_TT' | translate}}">{{ 'OF_STATS' | translate}}</button>
+                <button class="{{view.hostsPopup ? 'active':''}}" ng-click="loadHostData(); toggleExpanded('hostsPopup')" tooltip="{{'OF_HOSTS_TT' | translate}}">{{ 'OF_HOSTS' | translate}}</button>
+<!--                <button class="{{view.tagsPopup ? 'active':''}}" ng-click="toggleExpanded('tagsPopup')" tooltip="{{'OF_TAGS_TT' | translate}}">{{ 'OF_TAGS_LABEL' | translate}}</button>-->
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <div ng-show="showTopStatsPopup" class="popUpDevInfo">
+            <button class="close" ng-click="hideTopStatsPopup()" tooltip="{{'OF_CLOSE_WIN_TT' | translate}}">×</button>
+            <label class="sectionTitle">{{ 'OF_PORT_ST' | translate}}</label>
+            <button class="btn btn-primary" ng-click="showPopUpStatistics(1, null)" tooltip="{{'OF_PORT_ST_TT' | translate}}">{{ 'OF_PORT_STS' | translate}}</button>
+            <label class="sectionTitle">{{ 'OF_TABLE_ST' | translate}}</label>
+            <button class="btn btn-primary" ng-click="showPopUpStatistics(0, 'getFlowSstats')" tooltip="{{'OF_FLOW_ST_TT' | translate}}">{{ 'OF_FLOW_ST' | translate}}</button>
+            <button class="btn btn-primary" ng-click="showPopUpStatistics(0, 'getFlowTstats')" tooltip="{{'OF_FLOW_TB_ST_TT' | translate}}">{{ 'OF_FLOW_TB_ST' | translate}}</button>
+            <button class="btn btn-primary" ng-click="showPopUpStatistics(0, 'getAggregateFstats')" tooltip="{{'OF_AGG_ST_TT' | translate}}">{{ 'OF_AGG_ST' | translate}}</button>
+            <label class="sectionTitle">{{ 'OF_OTHER_ST' | translate}}</label>
+            <button class="btn btn-primary" ng-click="showPopUpStatistics(2, null)" tooltip="{{'OF_QU_ST_TT' | translate}}">{{ 'OF_QUEUE_ST' | translate}}</button>
+            <button class="btn btn-primary" ng-click="showPopUpStatistics(3, null)" tooltip="{{'OF_GROUP_ST_TT' | translate}}">{{ 'OF_GROUP_ST' | translate}}</button>
+            <button class="btn btn-primary" ng-click="showPopUpStatistics(4, null)" tooltip="{{'OF_METER_ST_TT' | translate}}">{{ 'OF_METER_ST' | translate}}</button>
+            <button class="btn btn-primary" ng-click="showPopUpStatistics(5, null)" tooltip="{{'OF_METER_FT_ST_TT' | translate}}">{{ 'OF_METER_FT_ST' | translate}}</button>
+        </div>
+
+<!--        <div ng-controller="tagManagementCtrl" ng-show="showBox" class="popUpDevInfo tagBox">
+            <button class="close" ng-click="hideBox()" tooltip="{{ 'OF_CLOSE_WIN_TT' | translate }}">×</button>
+
+            <div ng-if="selectedDevice && !selectedLink">
+                <label class="sectionTitle">{{ 'OF_TAG_DEVICE_LABEL' | translate }} : {{ selectedDevice }}</label>
+                <div class="mini-separator"></div>
+
+                <label ng-show="!tagsOfDevices[selectedDevice].length" class="sectionTitle">{{ 'OF_NO_TAGS_LABEL' | translate }}</label>
+                <table ng-show="tagsOfDevices[selectedDevice].length" class="table dataTable no-footer flowTable">
+                    <thead>
+                        <tr>
+                            <th class="header">{{ 'TM_TAG' | translate }}</th>
+                            <th class="header">{{ 'OF_VALUE_LABEL ' | translate }}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="tag in tagsOfDevices[selectedDevice] track by $index">
+                            <td>{{ tag.id }}</td>
+                            <td>{{ tag.value }}</td>
+                            <td>
+                                <a ng-click="deleteValue(tag, 'node')" class="clickable">
+                                     <i class="delete-icon" tooltip="{{'OF_REMOVE_TAG_TT' | translate}}"></i>
+                                 </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="mini-separator"></div>
+
+                <div>
+                    <label class="sectionTitle">{{ 'OF_TAG_LABEL' | translate }}</label>
+                    <select class="form-control" ng-model="selectedTag.id" ng-options="d.id as d.id for d in tagOptions" ng-change="changeSelectedTag()">
+                        <option value="">-</option>
+                    </select>
+                    <div class="mini-separator"></div>
+
+                    <label class="sectionTitle">{{ 'OF_TAG_VALUE_LABEL' | translate }}</label>
+                     <input type="text" name="false" ng-model="selectedTag.value" class="form-control"> 
+                    <input type="text" ng-model="selectedTag.value" typeahead="v['tag-values'] for v in selectedTag.values | filter:{'tag-values':$viewValue}" class="form-control">
+
+                    <div class="separator"></div>
+                    <button type="button" class="btn btn-primary" ng-click="saveTag('node')" ng-disabled="!selectedTag.id || !selectedTag.value">{{ 'OF_BUTTON_SAVE' | translate }}</button>
+                </div>
+            </div>
+
+            <div ng-if="!selectedDevice && selectedLink">
+                <label class="sectionTitle">{{ 'OF_TAG_LINK_LABEL' | translate }} : {{ selectedLink }}</label>
+                <div class="mini-separator"></div>
+
+                <label ng-show="!tagsOfLinks[selectedLink].length" class="sectionTitle">{{ 'OF_NO_TAGS_LINK_LABEL' | translate }}</label>
+                <table ng-show="tagsOfLinks[selectedLink].length" class="table dataTable no-footer flowTable">
+                    <thead>
+                        <tr>
+                            <th class="header">{{ 'TM_TAG' | translate }}</th>
+                            <th class="header">{{ 'OF_VALUE_LABEL ' | translate }}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="tag in tagsOfLinks[selectedLink] track by $index">
+                            <td>{{ tag.id }}</td>
+                            <td>{{ tag.value }}</td>
+                            <td>
+                                <a ng-click="deleteValue(tag, 'link')" class="clickable">
+                                     <i class="delete-icon" tooltip="{{'OF_REMOVE_TAG_TT' | translate}}"></i>
+                                 </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="mini-separator"></div>
+
+                <div>
+                    <label class="sectionTitle">{{ 'OF_TAG_LABEL' | translate }}</label>
+                    <select class="form-control" ng-model="selectedTag.id" ng-options="d.id as d.id for d in tagOptions" ng-change="changeSelectedTag(true)">
+                        <option value="">-</option>
+                    </select>
+
+                    <div class="mini-separator"></div>
+
+                    <label class="sectionTitle">{{ 'OF_TAG_VALUE_LABEL' | translate }}</label>
+                    <input type="text" ng-model="selectedTag.value" class="form-control"
+                           typeahead="v['tag-values'] for v in selectedTag.values | filter:{'tag-values':$viewValue}" >
+
+                    <div class="separator"></div>
+                    <button type="button" class="btn btn-primary" ng-click="saveTag('link')" ng-disabled="!selectedTag.id || !selectedTag.value">{{ 'OF_BUTTON_SAVE' | translate }}</button>
+                </div>
+            </div>
+
+        </div>-->
+
+        <div class="nextTopo col-md-12">
+            <div class="hostDevices">
+                <div><label>Show host devices :</label><input type="checkbox" ng-model="showHostDevice" /></div>
+            </div>
+
+            <alert ng-show="loadStatusTopoMsgs.length" type="danger">
+                <b> {{'OM_LOAD_ERROR' | translate }} </b>
+                <div class="text">
+                    <span ng-repeat="m in loadStatusTopoMsgs track by $index" >{{m | translate}}</span>
+                </div>
+            </alert>
+
+            <!-- <sigma-topology topology-data="topologyData" settings-sigma="sigmaSettings" settings-atlas="settingsAtlas" drag-nodes="true" custom-shapes="true" topology-custfunc="topologyCustfunc"></sigma-toppology> -->
+            <next-topology topo="topo" topology-data="topologyData" custom-functions="customFunctionality" show-host-device="showHostDevice" node-click-callback="toggleSelDevice"></next-topology>
+            
+        </div>
+
+        <div class="flowInfoWrapper sample-show-hide" ng-show="view.flowPopup">
+            <div ng-include src="view_path+'flow_info.tpl.html'"></div>
+        </div>
+
+        <div class="flowInfoWrapper dragAble sample-show-hide" ng-show="view.flowOperPopup">
+            <div ng-include src="view_path+'flow_oper.tpl.html'"></div>
+        </div>
+
+        <div class="flowInfoWrapper dragAble sample-show-hide" ng-show="view.flowsFilter">
+            <div ng-include src="view_path+'flows_filter.tpl.html'"></div>
+        </div>
+
+        <div class="flowInfoWrapper statistics sample-show-hide" ng-show="view.statisticsPopup">
+            <div ng-include src="view_path+'om_statistics.tpl.html'"></div>
+        </div>
+
+        <div class="flowInfoWrapper statistics sample-show-hide" ng-show="view.tagsPopup">
+            <div ng-include src="view_path+'ofm_tags.tpl.html'"></div>
+        </div>
+
+        <div class="flowInfoWrapper statistics sample-show-hide" ng-show="view.hostsPopup">
+            <div ng-include src="view_path+'ofm_hosts.tpl.html'"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

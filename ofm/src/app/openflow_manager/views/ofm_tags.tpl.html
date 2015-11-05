@@ -1,0 +1,34 @@
+<div>
+
+    <div class="dataTables_wrapper no-footer">
+        <table ng-table="tableParamsTags" class="table no-footer">
+            <tr ng-repeat="tag in $data track by $index" class="{{ ($index + 1) % 2 === 1 ? 'odd' : '' }}">
+                <td data-title="'TM_TAG' | translate" sortable="'id'">
+                    {{tag.id}}
+                </td>
+                <td data-title="'Value'">
+                    <div ng-if="tag.values && tag.values.tags" class="tableValues">
+
+                        <h5 class="text-center">
+                            {{ 'TM_TOPOLOGY_ID' | translate }} : {{ tag.values['topology-id'] }}
+                        </h5>
+
+                        <div class="head clearfix">
+                            <div class="col-md-5">Value</div>
+                            <div class="col-md-3">Type</div>
+                            <div class="col-md-4">Type ID</div>
+                        </div>
+
+                        <div class="tRow clearfix" ng-repeat="value in tag.values.tags">
+                            <div class="col-md-5"><span class="bold">{{ value['value'] }}</span></div>
+                            <div class="col-md-3">{{ value['type'] }}</div>
+                            <div class="col-md-4">{{ value['type'] === 'link' ? value['link-id'] : value['node-id'] }}</div>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>

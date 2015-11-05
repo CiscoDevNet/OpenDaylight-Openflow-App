@@ -1,0 +1,51 @@
+<!-- <ofstats data="portStatistics" data-type="'port statistics'"></ofstats> -->
+<div ng-controller="statisticsCtrl">
+    <div class="statsSelectBoxes">
+        <div class="col-md-2 form-group">
+            <label class="sectionTitle">{{ 'OM_STATS' | translate }}</label>
+            <select class="form-control col-md-2" ng-model="stats" ng-change="changeTplType()" ng-options="stat.name for stat in statisticsObj">
+                <option>-</option>
+            </select>
+        </div>
+
+        <div class="col-md-2 form-group" ng-show="stats.subStatistics.length">
+            <label>{{ 'OM_TYPE' | translate }}</label>
+            <select class="form-control col-md-2" ng-model="subStats" ng-change="getStatsData()"   ng-options="substat.name for substat in stats.subStatistics">
+                <option>-</option>
+            </select>
+        </div>
+
+        <!-- <div class="col-md-2" ng-hide="stats.name !== 'Ports statistics' && !subStats.name">
+            <label>{{ 'OM_DEVICE' | translate }}</label>
+            <select class="form-control input-sm col-md-2" ng-model="selectedDev" ng-change="getStatsData()" ng-options="dev.id for dev in selectedDevicesList | filter: dev.id.indexOf('config') === -1 ">
+                <option>-</option>
+            </select>
+        </div> -->
+
+        <div class="col-md-2" ng-hide="status.isWorking || (!stats && !stats.subStatistics.length) || (stats && stats.subStatistics.length && !subStats)">
+            <button class="btn btn-primary refresh-stats" ng-click="getStatsData()" tooltip="{{'OF_REFRESH_ST_DATA_TT' | translate}}">{{ 'OF_REFRESH_DATA' | translate }}</button>
+        </div>
+
+        <div class="clear"></div>
+
+        <div class="devList col-sm-12" ng-show="selectedDevicesList.length && !((!stats && !stats.subStatistics.length) || (stats && stats.subStatistics.length && !subStats))">
+            <label>{{ 'OM_DEVICE' | translate }}:</label>
+            <div class="clear"></div>
+
+            <div class="row col-sm-3" ng-repeat="dev in selectedDevicesList | filter: dev.id.indexOf('config') === -1 ">
+                <label tooltip="{{'OF_STATS_DEVICE_TT' | translate}}"><input type="checkbox" ng-click="toggleCheckedDev(dev)" ng-checked="dev.checkedStats"/>{{ getDeviceFullNameById(dev.id) }}</label>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+        
+    </div>
+    <!-- TODO: table stats -->
+    <table-stats ng-hide="status.isWorking || (!stats && !stats.subStatistics.length) || (stats && stats.subStatistics.length && !subStats)" graph-table-data="graphTableData" custom-func="updateDataFunc" table-type="tableType"></table-stats>
+
+    <alert type="{{status.type}}" ng-show="status.msg" class="stats_alert"><i ng-show="status.isWorking" class="icon-refresh icon-spin"></i><b> {{status.msg | translate }} </b></alert>
+
+    <div class="actionButtons">
+        <button type="button" class="btn btn-primary" ng-click="toggleExpanded('statisticsPopup')" tooltip="{{'OF_BACK_ST_TT' | translate}}">{{'OF_BUTTON_BACK' | translate}}</button>
+    </div>
+</div>
