@@ -1,0 +1,14 @@
+<div class="listPagination inlineBlock" ng-show="data.length > 1">
+    <!-- <button ng-click="shiftDisplayPrev()" ng-show="showPrevButton()" class="btn btn-primary" tooltip="{{'OF_PREV_ITEM' | translate}}">{{ 'OF_BTN_PREV' | translate }}</button> -->
+    <a ng-click="shiftDisplayPrev()" ng-show="showPrevButton()"><i tooltip="{{'OF_PREVIOUS' | translate}}" class="previous-icon"></i></a>
+    <div class="paginationItemWrapper">
+        <button ng-repeat="offset in displayOffsets" ng-if="currentDisplayIndex + offset > -1 && data.length > currentDisplayIndex + offset" class="btn  btn-like-tab {{ (data[currentDisplayIndex + offset] === actSelected ? 'btn-selected':'') }} {{ (getError(data[currentDisplayIndex + offset]) ? 'btn-error' : '') }}"
+                 ng-click="setActData(data[currentDisplayIndex + offset])" tooltip="{{'OF_SELECT_FLOW_TT' | translate}}">
+            {{ getName(data[currentDisplayIndex + offset]) }}
+            <i class="delete-icon inlineBlock" ng-click="deleteElement(data[currentDisplayIndex + offset])" tooltip="{{'OF_DEL_FLOW_TT' | translate}}"></i>
+        </button>
+    </div>
+    <!-- <button ng-click="shiftDisplayNext()"  ng-show="showNextButton()" class="btn btn-primary" tooltip="{{'LIST_PREV_ITEM' | translate}}">{{ 'OF_BTN_NEXT' | translate }}</button> -->
+    <a ng-click="shiftDisplayNext()" ng-show="showNextButton()"><i tooltip="{{'OF_NEXT' | translate}}" class="next-icon"></i></a>
+</div>
+

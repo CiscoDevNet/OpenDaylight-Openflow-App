@@ -1,0 +1,42 @@
+<div ng-controller="settingsCtrl">
+
+    <div class="settSlider">
+        <div>
+            <label class="settLabel">{{ 'OM_SETT_STAT' | translate }}</label>
+            <div class="clear"></div>
+        </div>
+        <div class="blockSlider"  ng-show="statisticsSettingsHandler.currentValue !== sliderPreInitValue">
+            <input ng-model="statisticsSettingsHandler.currentValue" type="text" id="mySlider1" slider options="statisticsSettingsHandler.options" />
+        </div>
+        <div class="clear"></div>
+        <alert ng-hide="statisticsSettingsHandler.currentValue !== sliderPreInitValue" type="danger">
+            <span>{{'OM_SETT_STAT_ERROR' | translate}}</span>
+        </alert>
+    </div>
+
+    
+<!--    <div class="settSlider">
+        <div>
+            <label class="settLabel">{{ 'OM_SETT_DEPLOYMENT' | translate }}</label>
+            <div class="clear"></div>
+        </div>
+
+        <div class="blockSlider radioButtonDiv">
+            <div ng-repeat="mode in deplyomentSettingsHandler.modes">
+                <input type="radio" ng-disabled="deplyomentSettingsHandler.values.settingDisabled" ng-model="deplyomentSettingsHandler.currentValue" ng-value="mode"> {{('OF_' + mode.toUpperCase()) | translate}}
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>-->
+
+    <div class="mt30">
+        <alert ng-show="deplyomentSettingsHandler.values.settingDisabled" type="danger">
+            <span>{{'OM_SETT_DEPLOYMENT_ERROR' | translate}}</span>
+        </alert>
+    </div>
+
+    <div class="actionButtons mt20">
+        <button type="button" class="btn btn-primary" ng-click="confirmSettings()" tooltip="{{'OF_SETT_CONFIRM_TT' | translate}}">{{'OF_SETT_CONFIRM' | translate}}</button>
+    </div>
+
+</div>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<open-flow-protocol>
+
+  <general-properties>
+
+    <flow-name type="property">
+      <displayLabel>OF_FLOW_NAME</displayLabel>
+      <dataType>string</dataType>
+      <tooltip>OF_FLOW_NAME_TT</tooltip>
+      <placeholder>Flow name</placeholder>
+    </flow-name>
+
+    <table_id type="property">
+      <displayLabel>OF_TABLE</displayLabel>
+      <dataType>uint8</dataType>
+      <tooltip>OF_TABLE_TT</tooltip>
+      <placeholder>0-255</placeholder>
+      <type>
+        <MANDATORY/>
+        <MOD_FIXED/>
+      </type>
+      <checkCbk>uint8CheckCallback</checkCbk>
+    </table_id>
+
+    <id type="property">
+      <displayLabel>OF_FLOW_ID</displayLabel>
+      <dataType>string</dataType>
+      <tooltip>OF_FLOW_ID_TT</tooltip>
+      <placeholder>Flow ID</placeholder>
+      <type>
+        <MANDATORY/>
+        <MOD_FIXED/>
+      </type>
+    </id>
+
+    <hard-timeout type="property">
+      <displayLabel>OF_HARD_TIMEOUT</displayLabel>
+      <dataType>uint16</dataType>
+      <tooltip>OF_HARD_TIMEOUT_TT</tooltip>
+      <placeholder>0</placeholder>
+      <checkCbk>uint16CheckCallback</checkCbk>
+    </hard-timeout>
+
+    <idle-timeout type="property">
+      <displayLabel>OF_IDLE_TIMEOUT</displayLabel>
+      <dataType>uint16</dataType>
+      <tooltip>OF_IDLE_TIMEOUT_TT</tooltip>
+      <placeholder>0</placeholder>
+      <checkCbk>uint16CheckCallback</checkCbk>
+    </idle-timeout>
+
+    <cookie type="property">
+      <displayLabel>OF_COOKIE</displayLabel>
+      <dataType>uint64</dataType>
+      <tooltip>OF_COOKIE_TT</tooltip>
+      <placeholder>0</placeholder>
+      <checkCbk>uint64CheckCallback</checkCbk>
+    </cookie>
+
+    <cookie_mask type="property">
+      <displayLabel>OF_COOKIE_MASK</displayLabel>
+      <dataType>uint64</dataType>
+      <tooltip>OF_COOKIE_MASK_TT</tooltip>
+      <placeholder>0</placeholder>
+      <checkCbk>uint64CheckCallback</checkCbk>
+    </cookie_mask>
+
+    <priority type="property">
+      <displayLabel>OF_PRIORITY</displayLabel>
+      <dataType>uint16</dataType>
+      <tooltip>OF_PRIORITY_TT</tooltip>
+      <placeholder>2</placeholder>
+      <type>
+        <MANDATORY/>
+        <MOD_FIXED/>
+      </type>
+      <checkCbk>uint16CheckCallback</checkCbk>
+    </priority>
+
+  </general-properties>
+
+
+
+
+  <match>
+
+    <match>
+
+      <ethernet-match type="element">
+        <ethernet-type type="element">
+          <type type="property">
+            <displayLabel>OF_ETH_TYPE</displayLabel>
+            <dataType>uint16</dataType>
+            <tooltip>OF_ETH_TYPE_TT</tooltip>
+            <placeholder>0x0800</placeholder>
+            <checkCbk>uint16CheckCallback</checkCbk>
+          </type>
+        </ethernet-type>
+      </ethernet-match>
+
+
+      <in-port type="property">
+        <displayLabel>OF_IN_PORT</displayLabel>
+        <dataType>string</dataType>
+        <tooltip>OF_IN_PORT_TT</tooltip>
+        <placeholder>Port</placeholder>
+      </in-port>
+
+    </match>
+
+  </match>
+
+
+
+
+  <actions>
+
+      <action-vrf-hi module="openflowplugin-extension-cisco-action" type="container">
+        <ofm-cont-properties>
+            <displayLabel>OF_VRF_HI_A_LABEL</displayLabel>
+        </ofm-cont-properties>
+
+        <children>
+            <vpn-type type="property">
+                <displayLabel>OF_VPN_TYPE_LABEL</displayLabel>
+                <dataType>string</dataType>
+                <tooltip>OF_VPN_TYPE_LABEL_TT</tooltip>
+                <placeholder>NONE</placeholder>
+                <permValues>NONE-VPNID-NAME</permValues>
+            </vpn-type>
+
+            <vrf-extra type="property">
+                <displayLabel>OF_VRF_EXTRA_LABEL</displayLabel>
+                <dataType>string</dataType>
+                <tooltip>OF_VRF_EXTRA_LABEL_TT</tooltip>
+            </vrf-extra>
+        </children>
+    </action-vrf-hi>
+
+      <action-netflow-hi module="openflowplugin-extension-cisco-action" type="container">
+          <ofm-cont-properties>
+              <displayLabel>OF_NETFLOW_LABEL</displayLabel>
+              <getReqData>emptyObjAction</getReqData>
+          </ofm-cont-properties>
+      </droaction-netflow-hi>
+
+  </actions>
+
+</open-flow-protocol>

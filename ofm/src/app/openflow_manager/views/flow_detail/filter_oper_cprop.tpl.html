@@ -1,0 +1,11 @@
+<div class="form-group">
+    <div class="{{ prop.children.length ? 'top' : '' }}">
+        <label><strong>{{prop.displayLabel | translate}}</strong></label>
+        <i class="delete-icon" ng-click="removeFlowProperty(prop, getSelectedProps())" tooltip="{{'OF_REMOVE_PROP_TT' | translate}}"></i>
+    </div>
+    <div class="inlineBlock" ng-show="prop.children.length">
+        <div ng-repeat="subprop in prop.children" class="formRow">
+            <div ng-include src="view_path_flow_detail+'filter_oper_prop.tpl.html'" ng-controller="propDetailCtrl" ng-init="init(subprop, '', false)"></div>
+        </div>
+    </div>
+</div>

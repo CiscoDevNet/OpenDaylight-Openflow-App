@@ -1,0 +1,38 @@
+<div class="openflow-modal">
+    <div class="modal-header">
+        <h3 class="modal-title">{{title}}</h3>
+    </div>
+    <div class="modal-body delete-flows">
+        <table class="delete-flow-table">
+            <tr ng-repeat="flow in flowNames track by $index" class="modal-row" ng-controller="delFlowLine">
+                <td>
+                    <table>
+                        <tr>
+                            <td ng-click="expanded = !expanded" class="expandable-row">
+                                <span>
+                                    {{ flow.name }}
+                                    <i class="{{ expanded ? 'collapse-arrow-icon' : 'expand-arrow-icon' }}"></i>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr ng-show="expanded">
+                            <td class="no-bckg">
+                                <div class="req-content">
+                                    <p><span class="req-span url">{{ 'OF_URL' | translate }} : </span>{{ flow.url }}</p>
+                                    <span class="req-span" ng-if="flow.data">{{ 'OF_DATA' | translate }} :</span>
+                                    <span class="req-span" ng-if="!flow.data">{{ 'OF_NO_DATA' | translate }}</span>
+                                    <textarea disabled ng-show="flow.data">{{parseJson(flow.data)}}</textarea>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-success" ng-click="ok()">OK</button>
+        <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+    </div>
+</div>

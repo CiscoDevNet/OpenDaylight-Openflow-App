@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<open-flow-protocol>
+
+  <general-properties>
+
+    <flow-name type="property">
+      <displayLabel>OF_FLOW_NAME</displayLabel>
+      <dataType>string</dataType>
+      <tooltip>OF_FLOW_NAME_TT</tooltip>
+      <placeholder>Flow name</placeholder>
+    </flow-name>
+
+    <table_id type="property">
+      <displayLabel>OF_TABLE</displayLabel>
+      <dataType>uint8</dataType>
+      <tooltip>OF_TABLE_TT</tooltip>
+      <placeholder>0-255</placeholder>
+      <type>
+        <MANDATORY/>
+        <MOD_FIXED/>
+      </type>
+      <checkCbk>uint8CheckCallback</checkCbk>
+    </table_id>
+
+    <id type="property">
+      <displayLabel>OF_FLOW_ID</displayLabel>
+      <dataType>string</dataType>
+      <tooltip>OF_FLOW_ID_TT</tooltip>
+      <placeholder>Flow ID</placeholder>
+      <type>
+        <MANDATORY/>
+        <MOD_FIXED/>
+      </type>
+    </id>
+
+    <hard-timeout type="property">
+      <displayLabel>OF_HARD_TIMEOUT</displayLabel>
+      <dataType>uint16</dataType>
+      <tooltip>OF_HARD_TIMEOUT_TT</tooltip>
+      <placeholder>0</placeholder>
+      <checkCbk>uint16CheckCallback</checkCbk>
+    </hard-timeout>
+
+    <idle-timeout type="property">
+      <displayLabel>OF_IDLE_TIMEOUT</displayLabel>
+      <dataType>uint16</dataType>
+      <tooltip>OF_IDLE_TIMEOUT_TT</tooltip>
+      <placeholder>0</placeholder>
+      <checkCbk>uint16CheckCallback</checkCbk>
+    </idle-timeout>
+
+    <cookie type="property">
+      <displayLabel>OF_COOKIE</displayLabel>
+      <dataType>uint64</dataType>
+      <tooltip>OF_COOKIE_TT</tooltip>
+      <placeholder>0</placeholder>
+      <checkCbk>uint64CheckCallback</checkCbk>
+    </cookie>
+
+    <cookie_mask type="property">
+      <displayLabel>OF_COOKIE_MASK</displayLabel>
+      <dataType>uint64</dataType>
+      <tooltip>OF_COOKIE_MASK_TT</tooltip>
+      <placeholder>0</placeholder>
+      <checkCbk>uint64CheckCallback</checkCbk>
+    </cookie_mask>
+
+    <priority type="property">
+      <displayLabel>OF_PRIORITY</displayLabel>
+      <dataType>uint16</dataType>
+      <tooltip>OF_PRIORITY_TT</tooltip>
+      <placeholder>2</placeholder>
+      <type>
+        <MANDATORY/>
+        <MOD_FIXED/>
+      </type>
+      <checkCbk>uint16CheckCallback</checkCbk>
+    </priority>
+
+  </general-properties>
+
+
+
+
+  <match>
+
+    <match>
+
+      <ethernet-match type="element">
+        <ethernet-destination type="element">
+          <address type="property">
+            <displayLabel>OF_DST_MAC</displayLabel>
+            <dataType>string</dataType>
+            <tooltip>OF_DST_MAC_TT</tooltip>
+            <placeholder>FF:FF:FF:FF:FF:FF</placeholder>
+            <checkCbk>macCheckCallback</checkCbk>
+          </address>
+        </ethernet-destination>
+
+        <ethernet-source type="element">
+          <address type="property">
+            <displayLabel>OF_SRC_MAC</displayLabel>
+            <dataType>string</dataType>
+            <tooltip>OF_SRC_MAC_TT</tooltip>
+            <placeholder>FF:FF:FF:FF:FF:FF</placeholder>
+            <checkCbk>macCheckCallback</checkCbk>
+          </address>
+        </ethernet-source>
+
+        <ethernet-type type="element">
+          <type type="property">
+            <displayLabel>OF_ETH_TYPE</displayLabel>
+            <dataType>uint16</dataType>
+            <tooltip>OF_ETH_TYPE_TT</tooltip>
+            <placeholder>0x0800</placeholder>
+            <checkCbk>uint16CheckCallback</checkCbk>
+          </type>
+        </ethernet-type>
+      </ethernet-match>
+
+      <vlan-match type="element">
+        <vlan-id type="element">
+          <vlan-id type="property">
+            <displayLabel>OF_VLAN_ID</displayLabel>
+            <dataType>uint16</dataType>
+            <tooltip>OF_VLAN_ID_TT</tooltip>
+            <placeholder>0-4095</placeholder>
+            <checkCbk>vlanIDCheckCallback</checkCbk>
+            <buildReq>vlanidProp</buildReq>
+          </vlan-id>
+        </vlan-id>
+
+        <vlan-pcp type="property">
+          <displayLabel>OF_VLAN_PCP</displayLabel>
+          <dataType>uint8</dataType>
+          <tooltip>OF_VLAN_PCP_TT</tooltip>
+          <placeholder>0-7</placeholder>
+          <checkCbk>vlanPCPCheckCallback</checkCbk>
+        </vlan-pcp>
+      </vlan-match>
+
+      <ip-match type="element">
+        <ip-dscp type="property">
+          <displayLabel>OF_TOS</displayLabel>
+          <dataType>uint8</dataType>
+          <tooltip>OF_TOS_TT</tooltip>
+          <placeholder>0-63</placeholder>
+          <checkCbk>TOSCheckCallback</checkCbk>
+        </ip-dscp>
+
+        <ip-protocol type="property">
+          <displayLabel>OF_IP_PROTOCOL</displayLabel>
+          <dataType>uint8</dataType>
+          <tooltip>OF_IP_PROTOCOL_TT</tooltip>
+          <placeholder>0</placeholder>
+          <checkCbk>uint8CheckCallback</checkCbk>
+        </ip-protocol>
+      </ip-match>
+
+      <ipv4-source type="property">
+        <displayLabel>OF_IPV4_SRC</displayLabel>
+        <dataType>string</dataType>
+        <tooltip>OF_IPV4_SRC_TT</tooltip>
+        <placeholder>255.255.255.255/32</placeholder>
+        <grouping>1-1</grouping>
+        <checkCbk>ipv4CheckCallback</checkCbk>
+      </ipv4-source>
+
+      <ipv4-destination type="property">
+        <displayLabel>OF_IPV4_DST</displayLabel>
+        <dataType>string</dataType>
+        <tooltip>OF_IPV4_DST_TT</tooltip>
+        <placeholder>255.255.255.255/32</placeholder>
+        <grouping>1-1</grouping>
+        <checkCbk>ipv4CheckCallback</checkCbk>
+      </ipv4-destination>
+
+      <ipv6-source type="property">
+        <displayLabel>OF_IPV6_SRC</displayLabel>
+        <dataType>string</dataType>
+        <tooltip>OF_IPV6_SRC_TT</tooltip>
+        <placeholder>FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF</placeholder>
+        <grouping>1-2</grouping>
+        <checkCbk>ipv6CheckCallback</checkCbk>
+      </ipv6-source>
+
+      <ipv6-destination type="property">
+        <displayLabel>OF_IPV6_DST</displayLabel>
+        <dataType>string</dataType>
+        <tooltip>OF_IPV6_DST_TT</tooltip>
+        <placeholder>FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF</placeholder>
+        <grouping>1-2</grouping>
+        <checkCbk>ipv6CheckCallback</checkCbk>
+      </ipv6-destination>
+
+      <udp-source-port type="property">
+        <displayLabel>OF_UDP_SRC</displayLabel>
+        <dataType>uint16</dataType>
+        <tooltip>OF_UDP_SRC_TT</tooltip>
+        <placeholder>0-65535</placeholder>
+        <grouping>2-1</grouping>
+        <checkCbk>portCheckCallback</checkCbk>
+      </udp-source-port>
+
+      <udp-destination-port type="property">
+        <displayLabel>OF_UDP_DST</displayLabel>
+        <dataType>uint16</dataType>
+        <tooltip>OF_UDP_DST_TT</tooltip>
+        <placeholder>0-65535</placeholder>
+        <grouping>2-1</grouping>
+        <checkCbk>portCheckCallback</checkCbk>
+      </udp-destination-port>
+
+      <tcp-source-port type="property">
+        <displayLabel>OF_TCP_SRC</displayLabel>
+        <dataType>uint16</dataType>
+        <tooltip>OF_TCP_SRC_TT</tooltip>
+        <placeholder>0-65535</placeholder>
+        <grouping>2-2</grouping>
+        <checkCbk>portCheckCallback</checkCbk>
+      </tcp-source-port>
+
+      <tcp-destination-port type="property">
+        <displayLabel>OF_TCP_DST</displayLabel>
+        <dataType>uint16</dataType>
+        <tooltip>OF_TCP_DST_TT</tooltip>
+        <placeholder>0-65535</placeholder>
+        <grouping>2-2</grouping>
+        <checkCbk>portCheckCallback</checkCbk>
+      </tcp-destination-port>
+
+      <in-port type="property">
+        <displayLabel>OF_IN_PORT</displayLabel>
+        <dataType>string</dataType>
+        <tooltip>OF_IN_PORT_TT</tooltip>
+        <placeholder>Port</placeholder>
+      </in-port>
+
+      <metadata type="element">
+        <metadata type="property">
+          <displayLabel>OF_META</displayLabel>
+          <dataType>uint64</dataType>
+          <tooltip>OF_META_TT</tooltip>
+          <placeholder>Metadata</placeholder>
+          <checkCbk>uint64CheckCallback</checkCbk>
+        </metadata>
+
+        <metadata-mask type="property">
+          <displayLabel>OF_META_MASK</displayLabel>
+          <dataType>uint64</dataType>
+          <tooltip>OF_META_MASK_TT</tooltip>
+          <placeholder>Metadata mask</placeholder>
+          <checkCbk>uint64CheckCallback</checkCbk>
+        </metadata-mask>
+      </metadata>
+
+    </match>
+
+  </match>
+
+
+
+
+  <actions>
+
+     <set-field type="container">
+      <ofm-cont-properties>
+        <displayLabel>OF_SRC_MAC_A_LABEL</displayLabel>
+      </ofm-cont-properties>
+
+      <children>
+        <ethernet-match type="element">
+          <ethernet-source type="element">
+            <address type="property">
+              <displayLabel>OF_SRC_MAC</displayLabel>
+              <dataType>string</dataType>
+              <tooltip>OF_SRC_MAC_TT</tooltip>
+              <placeholder>FF:FF:FF:FF:FF:FF</placeholder>
+              <checkCbk>macCheckCallback</checkCbk>
+            </address>
+          </ethernet-source>
+        </ethernet-match>
+      </children>
+    </set-field>
+
+    <set-field type="container">
+      <ofm-cont-properties>
+        <displayLabel>OF_DST_MAC_A_LABEL</displayLabel>
+      </ofm-cont-properties>
+
+      <children>
+        <ethernet-match type="element">
+          <ethernet-destination type="element">
+            <address type="property">
+              <displayLabel>OF_DST_MAC</displayLabel>
+              <dataType>string</dataType>
+              <tooltip>OF_DST_MAC_TT</tooltip>
+              <placeholder>FF:FF:FF:FF:FF:FF</placeholder>
+              <checkCbk>macCheckCallback</checkCbk>
+            </address>
+          </ethernet-destination>
+        </ethernet-match>
+      </children>
+    </set-field>
+
+    <set-vlan-id-action type="container">
+      <ofm-cont-properties>
+        <displayLabel>OF_VLAN_ID_A_LABEL</displayLabel>
+      </ofm-cont-properties>
+
+      <children>
+        <vlan-id type="property">
+          <displayLabel>OF_VLAN_ID</displayLabel>
+          <dataType>uint16</dataType>
+          <tooltip>OF_VLAN_ID_TT</tooltip>
+          <placeholder>0-4095</placeholder>
+          <checkCbk>vlanIDCheckCallback</checkCbk>
+        </vlan-id>
+      </children>
+    </set-vlan-id-action>
+
+    <set-vlan-pcp-action type="container">
+      <ofm-cont-properties>
+        <displayLabel>OF_VLAN_PCP_A_LABEL</displayLabel>
+      </ofm-cont-properties>
+
+      <children>
+        <vlan-pcp type="property">
+          <displayLabel>OF_VLAN_PCP</displayLabel>
+          <dataType>uint8</dataType>
+          <tooltip>OF_VLAN_PCP_TT</tooltip>
+          <placeholder>0-7</placeholder>
+          <checkCbk>vlanPCPCheckCallback</checkCbk>
+        </vlan-pcp>
+      </children>
+    </set-vlan-pcp-action>
+
+    <pop-vlan-action type="container">
+      <ofm-cont-properties>
+        <displayLabel>OF_POP_VLAN_A_LABEL</displayLabel>
+        <getReqData>emptyObjAction</getReqData>
+      </ofm-cont-properties>
+    </pop-vlan-action>
+
+    <drop-action type="container">
+      <ofm-cont-properties>
+        <displayLabel>OF_DROP_LABEL</displayLabel>
+        <getReqData>emptyObjAction</getReqData>
+      </ofm-cont-properties>
+    </drop-action>
+
+    <output-action type="container">
+      <ofm-cont-properties>
+        <displayLabel>OF_OUT_PORT</displayLabel>
+        <getReqData>outputPortAction</getReqData>
+      </ofm-cont-properties>
+
+      <children>
+        <output-node-connector type="property">
+          <displayLabel>OF_OUT_PORT</displayLabel>
+          <dataType>string</dataType>
+          <tooltip>OF_OUT_PORT_TT</tooltip>
+          <placeholder>Port</placeholder>
+          <displayOverride>portNumber</displayOverride>
+        </output-node-connector>
+
+        <max-length type="property">
+          <displayLabel>OF_MAX_LEN_LABEL</displayLabel>
+          <dataType>uint16</dataType>
+          <tooltip>OF_MAX_LEN_LABEL_TT</tooltip>
+          <placeholder>0</placeholder>
+          <checkCbk>uint16CheckCallback</checkCbk>
+        </max-length>
+      </children>
+    </output-action>
+
+    <output-action type="container">
+      <ofm-cont-properties>
+        <displayLabel>OF_CONTROLLER_LABEL</displayLabel>
+        <buildReq>controllerAction</buildReq>
+        <getReqData>controllerAction</getReqData>
+      </ofm-cont-properties>
+
+      <children>
+        <max-length type="property">
+          <displayLabel>OF_MAX_LEN_LABEL</displayLabel>
+          <dataType>uint16</dataType>
+          <tooltip>OF_MAX_LEN_LABEL_TT</tooltip>
+          <placeholder>0</placeholder>
+          <checkCbk>uint16CheckCallback</checkCbk>
+        </max-length>
+      </children>
+    </output-action>
+
+    <output-action type="container">
+      <ofm-cont-properties>
+        <displayLabel>OF_NORMAL_LABEL</displayLabel>
+        <buildReq>normalAction</buildReq>
+        <getReqData>normalAction</getReqData>
+      </ofm-cont-properties>
+
+      <children>
+        <max-length type="property">
+          <displayLabel>OF_MAX_LEN_LABEL</displayLabel>
+          <dataType>uint16</dataType>
+          <tooltip>OF_MAX_LEN_LABEL_TT</tooltip>
+          <placeholder>0</placeholder>
+          <checkCbk>uint16CheckCallback</checkCbk>
+        </max-length>
+      </children>
+    </output-action>
+
+    <action-vrf-hi module="openflowplugin-extension-cisco-action" type="container">
+        <ofm-cont-properties>
+            <displayLabel>OF_VRF_HI_A_LABEL</displayLabel>
+        </ofm-cont-properties>
+
+        <children>
+            <vpn-type type="property">
+                <displayLabel>OF_VPN_TYPE_LABEL</displayLabel>
+                <dataType>string</dataType>
+                <tooltip>OF_VPN_TYPE_LABEL_TT</tooltip>
+                <placeholder>NONE</placeholder>
+                <permValues>NONE-VPNID-NAME</permValues>
+            </vpn-type>
+
+            <vrf-extra type="property">
+                <displayLabel>OF_VRF_EXTRA_LABEL</displayLabel>
+                <dataType>string</dataType>
+                <tooltip>OF_VRF_EXTRA_LABEL_TT</tooltip>
+            </vrf-extra>
+        </children>
+    </action-vrf-hi>
+
+    <action-fcid-hi module="openflowplugin-extension-cisco-action" type="container">
+        <ofm-cont-properties>
+            <displayLabel>OF_FCID_A_LABEL</displayLabel>
+        </ofm-cont-properties>
+
+        <children>
+            <fcid type="property">
+                <displayLabel>OF_FCID_LABEL</displayLabel>
+                <dataType>uint16</dataType>
+                <tooltip>OF_FCID_LABEL_TT</tooltip>
+                <placeholder>0</placeholder>
+                <checkCbk>uint16CheckCallback</checkCbk>
+            </fcid>
+        </children>
+    </action-fcid-hi>
+
+  </actions>
+
+</open-flow-protocol>

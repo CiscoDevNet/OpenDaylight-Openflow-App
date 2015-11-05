@@ -1,0 +1,20 @@
+<div class="form-group">
+    <label>{{prop.displayLabel | translate}}</label>
+
+    <input ng-show="!prop.permValues.length" ng-if="!isStatic(selFlow, prop)" class="form-control" type="text" ng-model="prop.value" tooltip="{{getPropTooltipTranslate(prop.tooltip)}}" placeholder="{{prop.placeholder}}" ng-change="prop.check(); checkDuplicity(prop.label); prop.changeValCbk();" ng-disabled="prop.disabled">
+
+    <!-- <select ng-change="prop.changeValCbk()" ng-if="!isStatic(selFlow, prop) && prop.displayOverride === ''" ng-show="prop.permValues.length" class="form-control" ng-model="prop.value" ng-options="d for d in prop.permValues">
+        <option value="">-</option>
+    </select>
+
+    <select ng-change="prop.changeValCbk()" ng-if="!isStatic(selFlow, prop) && prop.displayOverride ==='index'" ng-show="prop.permValues.length" class="form-control" ng-model="prop.value" ng-options="prop.permValues.indexOf(d) as d for d in prop.permValues">
+        <option value="">-</option>
+    </select> -->
+    <select ng-change="prop.changeValCbk()" ng-if="!isStatic(selFlow, prop)" ng-show="prop.permValues.length" class="form-control" ng-model="prop.value" ng-options="d as prop.displayOverrideCbk(d, selDevice) for d in prop.permValues">
+        <option value="">-</option>
+    </select>
+
+    <button class="btn btn-danger" tooltip="{{prop.error}}" ng-show="prop.error">error</button>
+    <span class="operVal" ng-if="isStatic(selFlow, prop)">{{' ' + prop.value}}</span>
+    <i ng-show="deletable" ng-if="isMandatory(prop) === false" ng-click="removeFlowProperty(prop, getSelectedProps())" tooltip="{{'OF_REMOVE_PROP_TT' | translate}}" class="delete-icon"></i>
+</div>

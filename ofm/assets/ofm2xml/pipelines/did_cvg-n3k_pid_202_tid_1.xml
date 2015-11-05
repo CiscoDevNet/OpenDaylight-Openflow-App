@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<open-flow-protocol>
+
+  <general-properties>
+
+    <flow-name type="property">
+      <displayLabel>OF_FLOW_NAME</displayLabel>
+      <dataType>string</dataType>
+      <tooltip>OF_FLOW_NAME_TT</tooltip>
+      <placeholder>Flow name</placeholder>
+    </flow-name>
+
+    <table_id type="property">
+      <displayLabel>OF_TABLE</displayLabel>
+      <dataType>uint8</dataType>
+      <tooltip>OF_TABLE_TT</tooltip>
+      <placeholder>0-255</placeholder>
+      <type>
+        <MANDATORY/>
+        <MOD_FIXED/>
+      </type>
+      <checkCbk>uint8CheckCallback</checkCbk>
+    </table_id>
+
+    <id type="property">
+      <displayLabel>OF_FLOW_ID</displayLabel>
+      <dataType>string</dataType>
+      <tooltip>OF_FLOW_ID_TT</tooltip>
+      <placeholder>Flow ID</placeholder>
+      <type>
+        <MANDATORY/>
+        <MOD_FIXED/>
+      </type>
+    </id>
+
+    <hard-timeout type="property">
+      <displayLabel>OF_HARD_TIMEOUT</displayLabel>
+      <dataType>uint16</dataType>
+      <tooltip>OF_HARD_TIMEOUT_TT</tooltip>
+      <placeholder>0</placeholder>
+      <checkCbk>uint16CheckCallback</checkCbk>
+    </hard-timeout>
+
+    <idle-timeout type="property">
+      <displayLabel>OF_IDLE_TIMEOUT</displayLabel>
+      <dataType>uint16</dataType>
+      <tooltip>OF_IDLE_TIMEOUT_TT</tooltip>
+      <placeholder>0</placeholder>
+      <checkCbk>uint16CheckCallback</checkCbk>
+    </idle-timeout>
+
+    <cookie type="property">
+      <displayLabel>OF_COOKIE</displayLabel>
+      <dataType>uint64</dataType>
+      <tooltip>OF_COOKIE_TT</tooltip>
+      <placeholder>0</placeholder>
+      <checkCbk>uint64CheckCallback</checkCbk>
+    </cookie>
+
+    <cookie_mask type="property">
+      <displayLabel>OF_COOKIE_MASK</displayLabel>
+      <dataType>uint64</dataType>
+      <tooltip>OF_COOKIE_MASK_TT</tooltip>
+      <placeholder>0</placeholder>
+      <checkCbk>uint64CheckCallback</checkCbk>
+    </cookie_mask>
+
+    <priority type="property">
+      <displayLabel>OF_PRIORITY</displayLabel>
+      <dataType>uint16</dataType>
+      <tooltip>OF_PRIORITY_TT</tooltip>
+      <placeholder>2</placeholder>
+      <type>
+        <MANDATORY/>
+        <MOD_FIXED/>
+      </type>
+      <checkCbk>uint16CheckCallback</checkCbk>
+    </priority>
+
+  </general-properties>
+
+
+
+
+  <match>
+
+    <match>
+
+        <ethernet-destination type="element">
+          <address type="property">
+            <displayLabel>OF_DST_MAC</displayLabel>
+            <dataType>string</dataType>
+            <tooltip>OF_DST_MAC_TT</tooltip>
+            <placeholder>FF:FF:FF:FF:FF:FF</placeholder>
+            <checkCbk>macCheckCallback</checkCbk>
+          </address>
+        </ethernet-destination>
+      </ethernet-match>
+
+      <vlan-match type="element">
+        <vlan-id type="element">
+          <vlan-id type="property">
+            <displayLabel>OF_VLAN_ID</displayLabel>
+            <dataType>uint16</dataType>
+            <tooltip>OF_VLAN_ID_TT</tooltip>
+            <placeholder>0-4095</placeholder>
+            <checkCbk>vlanIDCheckCallback</checkCbk>
+            <buildReq>vlanidProp</buildReq>
+          </vlan-id>
+        </vlan-id>
+      </vlan-match>
+    
+    </match>
+
+  </match>
+
+
+
+
+  <actions>
+
+    <drop-action type="container">
+      <ofm-cont-properties>
+        <displayLabel>OF_DROP_LABEL</displayLabel>
+        <getReqData>emptyObjAction</getReqData>
+      </ofm-cont-properties>
+    </drop-action>
+
+
+    <output-action type="container">
+      <ofm-cont-properties>
+        <displayLabel>OF_CONTROLLER_LABEL</displayLabel>
+        <buildReq>controllerAction</buildReq>
+        <getReqData>controllerAction</getReqData>
+      </ofm-cont-properties>
+
+      <children>
+        <max-length type="property">
+          <displayLabel>OF_MAX_LEN_LABEL</displayLabel>
+          <dataType>uint16</dataType>
+          <tooltip>OF_MAX_LEN_LABEL_TT</tooltip>
+          <placeholder>0</placeholder>
+          <checkCbk>uint16CheckCallback</checkCbk>
+        </max-length>
+      </children>
+    </output-action>
+
+    <output-action type="container">
+      <ofm-cont-properties>
+        <displayLabel>OF_OUT_PORT</displayLabel>
+        <getReqData>outputPortAction</getReqData>
+      </ofm-cont-properties>
+
+      <children>
+        <output-node-connector type="property">
+          <displayLabel>OF_OUT_PORT</displayLabel>
+          <dataType>string</dataType>
+          <tooltip>OF_OUT_PORT_TT</tooltip>
+          <placeholder>Port</placeholder>
+          <displayOverride>portNumber</displayOverride>
+        </output-node-connector>
+
+        <max-length type="property">
+          <displayLabel>OF_MAX_LEN_LABEL</displayLabel>
+          <dataType>uint16</dataType>
+          <tooltip>OF_MAX_LEN_LABEL_TT</tooltip>
+          <placeholder>0</placeholder>
+          <checkCbk>uint16CheckCallback</checkCbk>
+        </max-length>
+      </children>
+    </output-action>
+
+    <output-action type="container">
+      <ofm-cont-properties>
+        <displayLabel>OF_OUT_PORT_2</displayLabel>
+        <getReqData>outputPortAction2</getReqData>
+      </ofm-cont-properties>
+
+      <children>
+        <output-node-connector type="property">
+          <displayLabel>OF_OUT_PORT_2</displayLabel>
+          <dataType>string</dataType>
+          <tooltip>OF_OUT_PORT_2</tooltip>
+          <placeholder>Port</placeholder>
+          <displayOverride>portNumber</displayOverride>
+        </output-node-connector>
+
+        <max-length type="property">
+          <displayLabel>OF_MAX_LEN_LABEL</displayLabel>
+          <dataType>uint16</dataType>
+          <tooltip>OF_MAX_LEN_LABEL_TT</tooltip>
+          <placeholder>0</placeholder>
+          <checkCbk>uint16CheckCallback</checkCbk>
+        </max-length>
+      </children>
+    </output-action>
+
+    <set-field type="container">
+      <ofm-cont-properties>
+        <displayLabel>OF_TCP_SRC_A_LABEL</displayLabel>
+      </ofm-cont-properties>
+
+      <children>
+        <tcp-source-port type="property">
+          <displayLabel>OF_TCP_SRC</displayLabel>
+          <dataType>uint16</dataType>
+          <tooltip>OF_TCP_SRC_TT</tooltip>
+          <placeholder>0-65535</placeholder>
+          <checkCbk>portCheckCallback</checkCbk>
+        </tcp-source-port>
+      </children>
+    </set-field>
+
+    <set-field type="container">
+      <ofm-cont-properties>
+        <displayLabel>OF_TCP_DST_A_LABEL</displayLabel>
+      </ofm-cont-properties>
+
+      <children>
+        <tcp-destination-port type="property">
+          <displayLabel>OF_TCP_DST</displayLabel>
+          <dataType>uint16</dataType>
+          <tooltip>OF_TCP_DST_TT</tooltip>
+          <placeholder>0-65535</placeholder>
+          <checkCbk>portCheckCallback</checkCbk>
+        </tcp-destination-port>
+      </children>
+    </set-field>
+
+    <set-field type="container">
+      <ofm-cont-properties>
+        <displayLabel>OF_UDP_SRC_A_LABEL</displayLabel>
+      </ofm-cont-properties>
+
+      <children>
+        <udp-source-port type="property">
+          <displayLabel>OF_UDP_SRC</displayLabel>
+          <dataType>uint16</dataType>
+          <tooltip>OF_UDP_SRC_TT</tooltip>
+          <placeholder>0-65535</placeholder>
+          <checkCbk>portCheckCallback</checkCbk>
+        </udp-source-port>
+      </children>
+    </set-field>
+
+    <set-field type="container">
+      <ofm-cont-properties>
+        <displayLabel>OF_UDP_DST_A_LABEL</displayLabel>
+      </ofm-cont-properties>
+
+      <children>
+        <udp-destination-port type="property">
+          <displayLabel>OF_UDP_DST</displayLabel>
+          <dataType>uint16</dataType>
+          <tooltip>OF_UDP_DST_TT</tooltip>
+          <placeholder>0-65535</placeholder>
+          <checkCbk>portCheckCallback</checkCbk>
+        </udp-destination-port>
+      </children>
+    </set-field>
+
+  </actions>
+
+</open-flow-protocol>

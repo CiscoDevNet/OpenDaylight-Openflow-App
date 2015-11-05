@@ -1,0 +1,56 @@
+<div ng-controller="filterPropsCtrl">
+    <div class="dragAbleArea">
+        <div>
+            <div ng-include src="view_path_flow_detail+'flow_oper_list.tpl.html'" ng-controller="propsListCtrl" ng-init="init('OF_GEN_PROP', 'flowProps', 'selectedFlowProps')"></div>
+            <div ng-include src="view_path_flow_detail+'flow_oper_list.tpl.html'" ng-controller="propsListCtrl" ng-init="init('OF_MATCH', 'flowMatchProps', 'selectedMatchProps')"></div>
+            <div ng-include src="view_path_flow_detail+'flow_oper_list.tpl.html'" ng-controller="propsListCtrl" ng-init="init('OF_ACTIONS', 'flowActionProps', 'selectedActionProps')"></div>
+        </div>
+    </div>
+
+    <div class="dropAbleArea">
+        <button ng-click="appendEditFilter()" class="icon-plus inlineBlock" tooltip="{{'OF_BTN_ADD_FILT' | translate }}"></button>
+        <ofman-pagination data="filters" act-selected="selFlow" label-cbk="filterLabelCbk" current-display-index="displayIndex" error-cbk="dummyErrorCbk" delete-element="deleteSelFilter"></ofman-pagination>
+
+        <br /><br />
+        <div class="formRow form-group">
+            <label>{{'OF_FILT_NAME' | translate }}</label>
+            <input class="form-control" type="text" ng-model="selFlow.name">
+        </div>
+        <div class="clear"></div>
+
+        <!-- <ofman-pagination data="selectedFlows" label-cbk="labelCbk" error-cbk="errorCbk" current-display-index="displayIndex" act-selected="selFlow"></ofman-pagination> -->
+
+        <!-- <div ng-include src="view_path_flow_detail_types+'flow_oper_device'+getDeviceStringForView(true)+'.tpl.html'"></div> -->
+        <!-- DEVICE -->
+        <div ng-include src="view_path_flow_detail_types+'device_selector.tpl.html'"></div>
+
+        <!-- GENERAL -->
+        <span class="sectionTitle">{{ 'OF_GEN_PROP' | translate }}</span>
+
+        <div ng-repeat="fp in selectedFlowProps" class="formRow">
+            <div ng-include src="view_path_flow_detail+'filter_oper_prop.tpl.html'" ng-controller="propDetailCtrl" ng-init="init(fp, 'selectedFlowProps', true)"></div>
+        </div>
+        <div class="clear"></div>
+
+        <!-- MATCH -->
+        <div ng-repeat="fp in selectedMatchProps" class="formRow">
+            <div ng-include src="view_path_flow_detail+'filter_oper_' + (isContainer(fp) ? 'cprop' : 'prop') + '.tpl.html'" ng-controller="propDetailCtrl" ng-init="init(fp, 'selectedMatchProps', true)"></div>
+        </div>
+        <div class="clear"></div>
+
+        <!-- ACTIONS -->
+        <span class="sectionTitle">{{ 'OF_ACTIONS' | translate }}</span>
+
+        <div ng-repeat="fp in selectedActionProps" class="formRow">
+            <div ng-include src="view_path_flow_detail+'filter_oper_' + (isContainer(fp) ? 'cprop' : 'prop') + '.tpl.html'" ng-controller="propDetailCtrl" ng-init="init(fp, 'selectedActionProps', true)"></div>
+        </div>
+        <div class="clear"></div>
+
+        <div class="actionButtons">
+            <button type="button" class="btn btn-primary" ng-click="saveCurrentFilter()">{{'OF_BTN_SAV_FILT' | translate }}</button>
+            <button type="button" class="btn btn-primary" ng-click="saveAndExitCurrentFilter()">{{'OF_BUTTON_SAVE_EXIT' | translate}}</button>
+            <button type="button" class="btn btn-primary" ng-click="toggleExpanded('flowPopup');loadFilters();">{{'OF_BUTTON_BACK' | translate}}</button>
+            <!-- <button type="button" class="btn btn-primary" ng-click="deleteSelFilter(selFlow); checkSelFilterOccure();">{{'OF_BTN_DEL_FILT' | translate }}</button> -->
+        </div>
+    </div>
+</div>

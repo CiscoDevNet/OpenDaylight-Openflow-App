@@ -1,0 +1,12 @@
+<div class="form-group">
+    <label>{{prop.displayLabel | translate}}</label>
+    <!--<input class="form-control input-small" type="text" ng-model="prop.value" tooltip="{{prop.tooltip | translate}}" placeholder="{{prop.placeholder}}">-->
+
+    <input ng-show="!prop.permValues.length" class="form-control" type="text" ng-model="prop.value" tooltip="{{prop.tooltip | translate}}" placeholder="{{prop.placeholder}}" ng-change="prop.check(); checkDuplicity(prop.label);" ng-disabled="prop.disabled">
+
+    <select ng-show="prop.permValues.length" class="form-control" ng-model="prop.value" ng-options="d as prop.displayOverrideCbk(d) for d in prop.permValues">
+        <option value="">-</option>
+    </select>
+
+    <i ng-show="deletable" ng-click="removeFlowProperty(prop, getSelectedProps())" tooltip="{{'OF_REMOVE_PROP_TT' | translate}}" class="delete-icon"></i>
+</div>

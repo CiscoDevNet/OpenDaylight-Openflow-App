@@ -1,0 +1,70 @@
+.footable input[type="text"]{
+    background-color:transparent;
+    border-style:none;
+}
+
+.footable input[type="text"]:focus{
+    border-style:inset;
+    border-color: rgba(82, 168, 236, 0.8);
+    outline: 0;
+    outline: thin dotted \9;
+    /* IE6-9 */
+
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+
+.footable input[readonly]:focus{
+    background-color:transparent;
+    border-color:black;
+    border-width:thin;
+    -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+      box-shadow: none;
+}
+
+.footableButton{
+    background-color: #dce9f9;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ebf3fc), to(#dce9f9));
+    background-image: -webkit-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image: -moz-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image: -ms-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image: -o-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image: linear-gradient(to bottom, #ebf3fc, #dce9f9);
+
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    -ms-border-radius:5px;
+    -o-border-radius:5px;
+    border-radius:5px;
+    -webkit-box-shadow:0 2px 5px rgba(0,0,0,0.2);
+    -moz-box-shadow:0 2px 5px rgba(0,0,0,0.2);
+    box-shadow:0 2px 5px rgba(0,0,0,0.2);
+    color: #444;
+    display:inline-block;
+    font-size:12px;
+    font-weight:bold;
+    padding:4px 12px;
+    text-decoration:none;
+    text-transform:uppercase;
+
+    margin-top:1%;
+    margin-bottom:1%;
+ } 
+.footableButton:hover{
+  background:#424242;
+  color:#fff
+}
+
+.fooId{
+   /* used for identifying each field as a key field in the th tag */
+}
+
+.fooEditable{
+   /* used for identifying each field as an editable field in the th tag */
+}
+
+.fooNewRecord{
+    /* used for identifying the new record layout in the tr tag */
+}

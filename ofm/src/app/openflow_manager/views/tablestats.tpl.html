@@ -1,0 +1,32 @@
+<div class="tableNoDataWarning" ng-hide="columns.length">{{ 'OF_NO_DATA' | translate }}</div>
+
+<table ng-table="tableParams" class="table dataTable" ng-show="columns.length">
+    <thead>
+      <tr ng-show="columns.length">
+          <th ng-repeat="column in columns" ng-show="column.show"
+              class="text-center sortable" ng-class="{
+                  'sort-asc': tableParams.isSortBy(column.name, 'asc'),
+                  'sort-desc': tableParams.isSortBy(column.name, 'desc')
+                }"
+              ng-click="tableParams.sorting(column.name, tableParams.isSortBy(column.name, 'asc') ? 'desc' : 'asc'); tableParams.reload();">
+              <div>{{column.name}}</div>
+          </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in $data">
+          <td ng-repeat="column in columns" ng-show="column.show" sortable="column.name">
+              {{row[column.name]}}
+          </td>
+      </tr>
+    </tbody>
+</table>
+
+<div ng-show="columns.length" class="statsList col-sm-12">
+    <label>{{ 'OF_STATS_SHOW' | translate }}:</label>
+    <div class="clear"></div>
+
+    <div class="statsCheckBoxes" ng-repeat="column in columns track by $index"  ng-show="column.name !== '$$hashKey'"><!-- col-sm-3 -->
+          <label tooltip="{{'OF_STATS_COLUMN_TT' | translate}}"><input ng-model="column.show" type="checkbox"/>{{column.name}}</label>
+    </div>
+</div>

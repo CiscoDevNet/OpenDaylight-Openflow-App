@@ -1,0 +1,7 @@
+<div>
+    <!-- PIPELINE -->
+    <h3 class="marginTop">{{'OF_PIP' | translate }}</h3>
+    <select class="form-control input-sm" style="width:300px" ng-change="setConfig(selConfig);" ng-model="selConfig" ng-options="getPipelineName(o) for o in idObjs">
+        <option value="">-</option>
+    </select>
+</div>
