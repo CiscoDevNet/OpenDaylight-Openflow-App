@@ -9,7 +9,7 @@ module.exports = function(grunt) {
       connect: {
         def: {
           options: {
-            base: 'build',
+            base: 'ofm',
             keepalive: true,
             port: 9000
           }
