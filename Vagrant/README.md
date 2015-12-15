@@ -56,7 +56,7 @@ $ grunt
 
 This should start a server with running OpenFlow Manager application. Now let's check that everything work. Open a web browser and hit the http://localhost:19000. You should see next something like that:
 
-![Working OFM](http://OpenDaylight-Openflow-App/Vagrant/img/OFM check.png)
+![Working OFM](https://raw.githubusercontent.com/CiscoDevNet/OpenDaylight-Openflow-App/Vagrant-setup/Vagrant/img/OFM%20check.png?token=ACLi_BtxXJxZmJFa7BRsdLriY40ePAViks5WePMIwA%3D%3D)
 
 If you see something similar than congratulations! Now you are all set!
 
@@ -78,11 +78,6 @@ License
 ----
 
 ???
-
-
-**Free Software, Hell Yeah!**
-
-[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
    [OpenDayLight]: <https://www.opendaylight.org/>
    [Mininet]: <http://mininet.org/>
