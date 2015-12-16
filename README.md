@@ -32,7 +32,7 @@ Version of OFM is available with the Cisco Open SDN Controller.
 
 OpenFlow Manager (OFM) allows you to manage the OpenFlow-enabled devices in your network.
 
-![](/Vagrant-setup/Vagrant/img/OFM-DevnetLabs.png)
+![](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/blob/Vagrant-setup/Vagrant/img/OFM-DevnetLabs.png)
  Figure 1 OFM Architecture
 
 Application consists from:
