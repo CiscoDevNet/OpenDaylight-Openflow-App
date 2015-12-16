@@ -1,4 +1,4 @@
-# OpenFlow-Manager
+# OpenFlow Manager
 
 ## Quick Overview
 
