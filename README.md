@@ -1,6 +1,34 @@
-# OpenFlow Manager
+# OpenDaylight OpenFlow Manager (OFM) App
 
-## Quick Overview
+OpenDaylight (ODL) is an open-source application development and delivery platform. Openflow Manager (OFM) is an application developed to run on top of ODL to visualize openflow (OF) topologies, program OF paths and gather OF stats. 
+
+## Team
+- Jan Medved
+- Daniel Malachovsky
+- Juraj Sebin
+- Vijay Kannan
+- Daniel Kuzma
+- Stanislav Jamrich
+- Zdenko 
+- Sergey Madaminov
+
+### Project Demo Link:
+
+xxxxx
+
+### Social Tags:
+
+SDN, Open Source, Openflow, NeXt, RESTCONF API, YANG
+
+### Project Kick-Off Date:
+
+January 2014
+
+### Current Status:
+
+Version of OFM is available in the Cisco Open SDN Controller
+
+## Application Overview
 
 OpenFlow Manager allows you to manage the OpenFlow-enabled devices in your network.
 
