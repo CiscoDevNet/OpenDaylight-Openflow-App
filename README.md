@@ -9,7 +9,7 @@ OpenDaylight (ODL) is an open-source application development and delivery platfo
 - Vijay Kannan
 - Daniel Kuzma
 - Stanislav Jamrich
-- Zdenko 
+- Zdenko Krnac
 - Sergey Madaminov
 
 ### Project Demo Link:
@@ -26,7 +26,7 @@ January 2014
 
 ### Current Status:
 
-Version of OFM is available in the Cisco Open SDN Controller
+Version of OFM is available with the Cisco Open SDN Controller. 
 
 ## Application Overview
 
