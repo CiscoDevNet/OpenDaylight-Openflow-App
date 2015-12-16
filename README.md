@@ -14,7 +14,7 @@ OpenDaylight (ODL) is an open-source application development and delivery platfo
 
 ### Project Demo Link:
 
-xxxxx
+https://github.com/CiscoDevNet/OpenDaylight-Openflow-App
 
 ### Social Tags:
 
@@ -30,7 +30,7 @@ Version of OFM is available with the Cisco Open SDN Controller.
 
 ## Application Overview
 
-OpenFlow Manager allows you to manage the OpenFlow-enabled devices in your network.
+OpenFlow Manager (OFM) allows you to manage the OpenFlow-enabled devices in your network.
 
 Application consists from:
 
