@@ -75,11 +75,12 @@ Figure 4 shows the OFM stats screen
 
 ## OpenFlow Manager installation
 
-There are two methods to configure/operate OFM with an instance of ODL and Openflow Network. The first is a step-by-step instation of ODL and mininet (open source openflow virtual network).
+There are two methods to configure/operate OFM with an instance of ODL and Openflow Network.
 
-The second involves use of Vagrant.
+1. Step-by-step instation of ODL and mininet (open source openflow virtual network).
+2. Vagrant Method by going to the [Vagrant Page](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/tree/Vagrant-setup/Vagrant)
 
-[Vagrant Page](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/tree/Vagrant-setup/Vagrant)
+### Method 1 - tep-by-step instation of ODL and mininet
 
 To run backend for our app you can use pre-build VM image including Mininet downloadable from
 http://mininet.org/download/.
