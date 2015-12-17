@@ -58,15 +58,15 @@ Figure 2 shows the initial display once the OF inventory is collected and render
 
 Figure 2 Main OFM panel
 
+Figure 3 depicts OFM flow management function
 
+![](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/blob/Vagrant-setup/Vagrant/img/flow%20management.png)
 
+Figure 3 OFM Flow Management panel
 
+![](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/blob/Vagrant-setup/Vagrant/img/statistics.png)
 
-
-
-
-
-
+Figure 4 shows the OFM stats screen
 
 
 
