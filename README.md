@@ -8,6 +8,7 @@ OpenDaylight (ODL) is an open-source application development and delivery platfo
 - Juraj Sebin
 - Vijay Kannan
 - Chris Metz
+- Niklas Montin
 - Daniel Kuzma
 - Stanislav Jamrich
 - Zdenko Krnac
