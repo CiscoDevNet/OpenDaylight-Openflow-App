@@ -55,7 +55,7 @@ Application consists from:
 
 *Hosts Tab* provides summary information for the OpenFlow-enabled host devices that OFM manages.
 
-![](
+![](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/blob/Vagrant-setup/Vagrant/img/OFM%20check.png)
 
 ## OpenFlow Manager installation
 
