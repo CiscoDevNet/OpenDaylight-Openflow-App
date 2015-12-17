@@ -26,14 +26,23 @@ January 2014
 
 ### Current Status:
 
-Version of OFM is available with the Cisco Open SDN Controller. 
+An enhanced version of OFM is available with the Cisco Open SDN Controller. 
 
 ## Application Overview
 
-OpenFlow Manager (OFM) allows you to manage the OpenFlow-enabled devices in your network.
+Software Defined Networking (SDN) involves an application interacting with a network (composed of domain-specifc devices) for the purpose of simplifying operations or enabling a service. A controller is positioned between the application and network and interacts with network elements (e.g. switches) in the southbound direction using a variety of different protocols. In the northbound direction it presents an abstraction of the network using in practice common REST APIs. The controller vehicle for this applicatin is ODL. This innovation supports applications for managing openflow networks called Openflow Manager (OFM). 
+
+Figure 1 depicts the architecture of the OFM components 
+
 
 ![](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/blob/Vagrant-setup/Vagrant/img/OFM-DevnetLabs.png)
  Figure 1 OFM Architecture
+
+From the bottom-up we have a network of openflow switches employing a "Match/Action: forwarding paradigm to switch packets through network. running MPLS for label switching packets across the network, and either OSPF or ISIS to maintain and distribute the topology (link-state) database amongst all routers in the network. One of the routers is a BGP-LS and it transports a copy of the topology database to the ODL controller. The routers will also run a PCEP (stands for path computation element protocol) used by the ODL controller to instruct a source router to setup an MPLS traffic engineered path to a destination router. This is very network- and protocol-specific details, which frankly the end-user may not know or care about. This is where OpenDaylight and applications come into play.
+
+Inside of ODL there are YANG models of the network topology and how to configure MPLS TE tunnels on routers. The model-driven service adaptation layer (MD-SAL) takes these models and automatically generates a set of REST APIs (referred to as RESTCONF) that applications can call. BGP-LS Manager is an application that calls the RESTCONF APIs to retrieve and render a visualization of the network viewable through a simple web browser. Pathman is another application calling RESTCONF APIs when the end-user wishes to manage one or more MPLS TE paths in the network, again done through a web browser. The other key component here is the open source NeXt UI framework (based on HTML5/CSS/Javascript) used to generate a crisp representation of the network topology.
+
+OpenFlow Manager (OFM) allows you to manage the OpenFlow-enabled devices in your network.
 
 Application consists from:
 
