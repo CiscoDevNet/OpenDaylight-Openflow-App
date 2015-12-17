@@ -53,7 +53,9 @@ Application consists from:
 
 *Statistics tab* provides statistics for both the flows configured in your network and the corresponding device ports.
 
-*Hosts Tab* provides summary information for the OpenFlow-enabled host devices that OSC manages.
+*Hosts Tab* provides summary information for the OpenFlow-enabled host devices that OFM manages.
+
+![](
 
 ## OpenFlow Manager installation
 
