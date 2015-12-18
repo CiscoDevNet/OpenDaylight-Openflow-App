@@ -45,7 +45,9 @@ From the bottom-up we have a network of openflow switches employing a "Match/Act
 
 Inside of ODL there are YANG models of the network topology and how to program flows across the network. The model-driven service adaptation layer (MD-SAL) takes these models and automatically generates a set of REST APIs (referred to as RESTCONF) that applications can call. OFM is the application that calls the RESTCONF APIs to retrieve OF switch inventory as well program flows and gather stats. The other key component here is the UI based on HTML5/CSS/Javascript utilizing various open source frameworks including AngularJS and NeXt. OFM is acccessible through a web browser such a Chrome.
 
-Figure 2 shows the initial display once the OF inventory is collected and rendered. The basic functions of OFM as arranged across the top consist of:
+Figure 2 shows the initial display once the OF inventory is collected and rendered. To support topological context for all functions, each panel described below will include this topology/inventory display.
+
+The basic subfunctions of OFM as arranged across the top consist of:
 
 *Basic View Tab*, the default tab, displays topology mapping the OpenFlow-enabled devices in your network and the hosts that are connected to them.
 
@@ -58,8 +60,9 @@ Figure 2 shows the initial display once the OF inventory is collected and render
 ![](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/blob/Vagrant-setup/Vagrant/img/OFM%20check.png)
 
 Figure 2 Main OFM panel
+From this panel the user can now navigate to the desired function.
 
-Figure 3 depicts OFM flow management function
+The first function the user might want to engage is flow deployment.Figure 3 depicts OFM flow management function. 
 
 ![](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/blob/Vagrant-setup/Vagrant/img/flow%20management.png)
 
