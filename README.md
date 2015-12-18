@@ -38,8 +38,7 @@ Figure 1 depicts the architecture of the OFM components
 
 
 ![](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/blob/Vagrant-setup/Vagrant/img/OFM-DevnetLabs.png)
-
-Figure 1 OFM Architecture
+ Figure 1 OFM Architecture
 
 From the bottom-up we have a network of openflow switches employing a "Match/Action" forwarding paradigm to execute flow switching operations through the network. Openflow switches support an openflow agent and use the running MPLS for label switching packets across the network, and either OSPF or ISIS to maintain and distribute the topology (link-state) database amongst all routers in the network. One of the routers is a BGP-LS and it transports a copy of the topology database to the ODL controller. The routers will also run a PCEP (stands for path computation element protocol) used by the ODL controller to instruct a source router to setup an MPLS traffic engineered path to a destination router. This is very network- and protocol-specific details, which frankly the end-user may not know or care about. This is where OpenDaylight and applications come into play.
 
