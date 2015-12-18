@@ -41,7 +41,7 @@ Figure 1 depicts the architecture of the OFM components
 
  *Figure 1 OFM Architecture*
 
-
+---
 
 
 
@@ -66,7 +66,7 @@ The basic subfunctions of OFM as arranged across the top consist of:
 *Figure 2 Main OFM panel*
 From this panel the user can now navigate to the desired function.
 
-
+---
 
 The first function the user might want to engage is flow deployment.Figure 3 depicts OFM flow management function. 
 
@@ -74,11 +74,15 @@ The first function the user might want to engage is flow deployment.Figure 3 dep
 
 *Figure 3 OFM Flow Management panel*
 
+---
+
 And finally the user might want to gather stats from the OF devices as depicted in figure 4
 
 ![](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/blob/Vagrant-setup/Vagrant/img/statistics.png)
 
 *Figure 4 shows the OFM stats screen*
+
+---
 
 A key objective of SDN in general and enabled in open source by ODL is network abstraction thus simplify network operations. Instead of cubersome per-device configuration and managment, we provide a web browser user interface that operators use to manage openflow networks and deivces. OFM is that application.
 
