@@ -37,7 +37,7 @@ Software Defined Networking (SDN) involves an application interacting with a net
 Figure 1 depicts the architecture of the OFM components 
 
 
-![](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/blob/Vagrant-setup/Vagrant/img/OFM-DevnetLabs.png style="border: solid black 1px)
+![]("https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/blob/Vagrant-setup/Vagrant/img/OFM-DevnetLabs.png" style="border: solid black 1px)
 
  *Figure 1 OFM Architecture*
 
