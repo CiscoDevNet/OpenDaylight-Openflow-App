@@ -37,9 +37,10 @@ Software Defined Networking (SDN) involves an application interacting with a net
 Figure 1 depicts the architecture of the OFM components 
 
 
-![](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/blob/Vagrant-setup/Vagrant/img/OFM-DevnetLabs.png) style="border: solid black 1px
+![](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/blob/Vagrant-setup/Vagrant/img/OFM-DevnetLabs.png)
 
  *Figure 1 OFM Architecture*
+
 
 
 From the bottom-up we have a network of openflow switches employing a "Match/Action" forwarding paradigm to execute flow switching operations through the network. Openflow switches support an openflow agent and use the running MPLS for label switching packets across the network, and either OSPF or ISIS to maintain and distribute the topology (link-state) database amongst all routers in the network. One of the routers is a BGP-LS and it transports a copy of the topology database to the ODL controller. The routers will also run a PCEP (stands for path computation element protocol) used by the ODL controller to instruct a source router to setup an MPLS traffic engineered path to a destination router. This is very network- and protocol-specific details, which frankly the end-user may not know or care about. This is where OpenDaylight and applications come into play.
@@ -60,20 +61,24 @@ The basic subfunctions of OFM as arranged across the top consist of:
 
 ![](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/blob/Vagrant-setup/Vagrant/img/OFM%20check.png)
 
-Figure 2 Main OFM panel
+*Figure 2 Main OFM panel*
 From this panel the user can now navigate to the desired function.
+
+
 
 The first function the user might want to engage is flow deployment.Figure 3 depicts OFM flow management function. 
 
 ![](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/blob/Vagrant-setup/Vagrant/img/flow%20management.png)
 
-Figure 3 OFM Flow Management panel
+*Figure 3 OFM Flow Management panel*
+
+And finally the user might want to gather stats from the OF devices as depicted in figure 4
 
 ![](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/blob/Vagrant-setup/Vagrant/img/statistics.png)
 
-Figure 4 shows the OFM stats screen
+*Figure 4 shows the OFM stats screen*
 
-
+A key objective of SDN in general and enabled in open source by ODL is network abstraction thus simplify network operations. Instead of cubersome per-device configuration and managment, we provide a web browser user interface that operators use to manage openflow networks and deivces. OFM is that application.
 
 
 
