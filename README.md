@@ -20,7 +20,7 @@ https://github.com/CiscoDevNet/OpenDaylight-Openflow-App
 
 ### Social Tags:
 
-SDN, Open Source, Openflow, NeXt, RESTCONF API, YANG
+SDN, Open Source, OpenDaylight, Openflow, NeXt, RESTCONF API, YANG
 
 ### Project Kick-Off Date:
 
