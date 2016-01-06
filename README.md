@@ -1,6 +1,6 @@
 # OpenDaylight OpenFlow Manager (OFM) App
 
-OpenDaylight (ODL) is an open-source application development and delivery platform. Openflow Manager (OFM) is an application developed to run on top of ODL to visualize openflow (OF) topologies, program OF paths and gather OF stats. 
+OpenDaylight (ODL) is an open-source application development and delivery platform. OpenFlow Manager (OFM) is an application developed to run on top of ODL to visualize OpenFlow (OF) topologies, program OF paths and gather OF stats. 
 
 ## Team
 - Jan Medved
@@ -21,7 +21,7 @@ https://github.com/CiscoDevNet/OpenDaylight-Openflow-App
 
 ### Social Tags:
 
-SDN, Open Source, OpenDaylight, Openflow, NeXt, RESTCONF API, YANG
+SDN, Open Source, OpenDaylight, OpenFlow, NeXt, RESTCONF API, YANG
 
 ### Project Kick-Off Date:
 
@@ -29,11 +29,11 @@ January 2014
 
 ### Current Status:
 
-An enhanced version of OFM is available with the Cisco Open SDN Controller. 
+An enhanced version of OFM is available with the [Cisco Open SDN Controller](https://developer.cisco.com/site/openSDN/). 
 
 ## Application Overview
 
-Software Defined Networking (SDN) involves an application interacting with a network (composed of domain-specifc devices) for the purpose of simplifying operations or enabling a service. A controller is positioned between the application and network and interacts with network elements (e.g. switches) in the southbound direction using a variety of different protocols. In the northbound direction it presents an abstraction of the network using in practice common REST APIs. The controller vehicle for this applicatin is ODL. This innovation supports applications for managing openflow networks called Openflow Manager (OFM). 
+Software Defined Networking (SDN) involves an application interacting with a network (composed of domain-specifc devices) for the purpose of simplifying operations or enabling a service. A controller is positioned between the application and network and interacts with network elements (e.g. switches) in the southbound direction using a variety of different protocols. In the northbound direction it presents an abstraction of the network using in practice common REST APIs. The controller vehicle for this applicatin is ODL. The OpenFlow Manager (OFM) is an application that leverages this innovation to manage OpenFlow network. 
 
 Figure 1 depicts the architecture of the OFM components 
 
@@ -46,9 +46,9 @@ Figure 1 depicts the architecture of the OFM components
 
 
 
-From the bottom-up we have a network of openflow switches employing a "Match/Action" forwarding paradigm to execute flow switching operations through the network. Openflow switches support an openflow agent and use the running MPLS for label switching packets across the network, and either OSPF or ISIS to maintain and distribute the topology (link-state) database amongst all routers in the network. One of the routers is a BGP-LS and it transports a copy of the topology database to the ODL controller. The routers will also run a PCEP (stands for path computation element protocol) used by the ODL controller to instruct a source router to setup an MPLS traffic engineered path to a destination router. This is very network- and protocol-specific details, which frankly the end-user may not know or care about. This is where OpenDaylight and applications come into play.
+From the bottom-up we have a network of OpenFlow switches employing a "Match/Action" forwarding paradigm to execute flow switching operations through the network. OpenFlow switches support an OpenFlow agent and use MPLS for label switching packets across the network, and either OSPF or ISIS to maintain and distribute the topology (link-state) database amongst all routers in the network. One of the routers is a BGP-LS and it transports a copy of the topology database to the ODL controller. The routers will also run PCEP (stands for path computation element protocol) used by the ODL controller to instruct a source router to setup an MPLS traffic engineered path to a destination router. This are very network- and protocol-specific details, which frankly the end-user may not know or care about. This is where OpenDaylight and applications come into play.
 
-Inside of ODL there are YANG models of the network topology and how to program flows across the network. The model-driven service adaptation layer (MD-SAL) takes these models and automatically generates a set of REST APIs (referred to as RESTCONF) that applications can call. OFM is the application that calls the RESTCONF APIs to retrieve OF switch inventory as well program flows and gather stats. The other key component here is the UI based on HTML5/CSS/Javascript utilizing various open source frameworks including AngularJS and NeXt. OFM is acccessible through a web browser such a Chrome.
+Inside of ODL there are YANG models of the network topology and how to program flows across the network. The model-driven service adaptation layer (MD-SAL) takes these models and automatically generates a set of REST APIs (referred to as RESTCONF) that applications can call. OFM is the application that calls the RESTCONF APIs to retrieve OF switch inventory as well as to program flows and gather stats. The other key component here is the UI based on HTML5/CSS/Javascript utilizing various open source frameworks including AngularJS and NeXt. OFM is acccessible through a web browser such a Chrome.
 
 Figure 2 shows the initial display once the OF inventory is collected and rendered. To support topological context for all functions, each panel described below will include this topology/inventory display.
 
@@ -69,7 +69,7 @@ From this panel the user can now navigate to the desired function.
 
 ---
 
-The first function the user might want to engage is flow deployment.Figure 3 depicts OFM flow management function. 
+The first function the user might want to engage is flow deployment. Figure 3 depicts OFM flow management function. 
 
 ![](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/blob/Vagrant-setup/Vagrant/img/flow%20management.png)
 
@@ -77,7 +77,7 @@ The first function the user might want to engage is flow deployment.Figure 3 dep
 
 ---
 
-And finally the user might want to gather stats from the OF devices as depicted in figure 4
+And finally the user might want to gather stats from the OF devices as depicted in Figure 4
 
 ![](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/blob/Vagrant-setup/Vagrant/img/statistics.png)
 
@@ -85,21 +85,21 @@ And finally the user might want to gather stats from the OF devices as depicted 
 
 ---
 
-A key objective of SDN in general and enabled in open source by ODL is network abstraction thus simplify network operations. Instead of cubersome per-device configuration and managment, we provide a web browser user interface that operators use to manage openflow networks and deivces. OFM is that application.
+A key objective of SDN in general and enabled in open source by ODL is network abstraction thus simplify network operations. Instead of cubersome per-device configuration and managment, we provide a web browser user interface that operators use to manage OpenFlow networks and deivces. OFM is that application.
 
 
 
 
 ## OpenFlow Manager installation
 
-There are two methods to configure/operate OFM with an instance of ODL and Openflow Network.
+There are two methods to configure/operate OFM with an instance of ODL and OpenFlow Network.
 
-1. Step-by-step installation of OFM, ODL and mininet (open source openflow virtual network).
-2. Vagrant Method by going to the [Vagrant Page](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/tree/Vagrant-setup/Vagrant)
+1. Vagrant Method by going to the [Vagrant Page](https://github.com/CiscoDevNet/OpenDaylight-Openflow-App/tree/Vagrant-setup/Vagrant)
+2. Step-by-Step installation of OFM, ODL and mininet (open source openflow virtual network).
+ 
+### Method 2 - Step-by-step instation of ODL and mininet
 
-### Method 1 - tep-by-step instation of ODL and mininet
-
-To run backend for our app you can use pre-build VM image including Mininet downloadable from
+To run backend for our app you can use pre-built VM image including Mininet downloadable from
 http://mininet.org/download/.
 
 To use this VM as a backend for our app you need to install ODL following this tutorial
