@@ -148,3 +148,4 @@ You can use this simple Gruntfile.js
   };
 ```
 After running grunt you can access OFM standalone app via web browser typing URL http://localhost:9000.
+If you want to host OFM standalone app via web browser using remote or vm ip you need to add ' hostname: "<remote or vm ip>" ' in 'Gruntfile.js' file under 'options:{}' . So, that you can access app by using this url - http://{VM-IP}:9000 
